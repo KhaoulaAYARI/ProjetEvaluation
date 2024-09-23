@@ -1,0 +1,29 @@
+
+
+<nav>
+       {# option publique #}
+       <a href="">Option1 publique</a>
+        {# option pour admin #}
+        {% if  is_granted('ROLE_ADMIN')  %}
+            <a href="">Option uniquement Admin</a>
+        {% endif %}
+        {# option pour tous les users #}
+        {% if  is_granted('ROLE_USER')  %}
+            <a href="">Option2 user</a>
+            <a href="">Option3 user</a>
+        {% endif %}
+
+
+       {% if app.user %}
+            connecté: {{app.user.email}}
+            
+            <a href="{{ path('app_logout')}}">Logout</a>
+        {% else %}
+            <a href="{{ path('app_login')}}">Login</a>
+       {% endif %}
+       
+            
+            
+            
+       
+       </nav>
