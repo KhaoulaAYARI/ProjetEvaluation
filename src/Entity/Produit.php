@@ -28,6 +28,15 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'produitsDet')]
     private ?DetailCommande $produitsDetail = null;
 
+// //j'ai ajouté la methode setFournisseur
+    private $fournisseur;
+
+    public function setFournisseur(Fournisseur $fournisseur): void
+    {
+        $this->fournisseur = $fournisseur;
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
