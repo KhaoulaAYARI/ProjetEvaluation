@@ -25,15 +25,41 @@ class Produit
     #[ORM\ManyToOne(inversedBy: 'produitsFournisseur')]
     private ?Fournisseur $produitsF = null;
 
-    #[ORM\ManyToOne(inversedBy: 'produitsDet')]
-    private ?DetailCommande $produitsDetail = null;
 
 // //j'ai ajouté la methode setFournisseur
     private $fournisseur;
 
+    public function hydrate(array $init)
+    {
+        foreach ($init as $propriete => $valeur) {
+            $nomSet = "set" . ucfirst($propriete);
+            if (!method_exists($this, $nomSet)) {
+                // à nous de voir selon le niveau de restriction...                // throw new Exception("La méthode {$nomSet} n'existe pas");            
+            } else {
+                // appel au set                
+                $this->$nomSet($valeur);
+            }
+        }
+    }
+
+    
+    public function __construct(array $init)
+    {
+        $this->hydrate($init);
+    }
+
+
     public function setFournisseur(Fournisseur $fournisseur): void
     {
         $this->fournisseur = $fournisseur;
+    }
+// //j'ai ajouté la methode setDetailCommande
+
+    private $detailCommande;
+
+    public function setDetailCommande(DetailCommande $detailCommande): void
+    {
+        $this->detailCommande = $$detailCommande;
     }
 
 
@@ -90,15 +116,5 @@ class Produit
         return $this;
     }
 
-    public function getProduitsDetail(): ?DetailCommande
-    {
-        return $this->produitsDetail;
-    }
 
-    public function setProduitsDetail(?DetailCommande $produitsDetail): static
-    {
-        $this->produitsDetail = $produitsDetail;
-
-        return $this;
-    }
 }

@@ -42,27 +42,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 10)]
     private ?string $matricule = null;
 
-    /**
-     * @var Collection<int, Evaluation>
-     */
-    #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'userEval')]
-    private Collection $feedback;
-
-
-        //hydrate
-        // public function hydrate(array $init)    
-        // {        foreach ($init as $propriete => $valeur) 
-        //     {            $nomSet = "set" . ucfirst($propriete);
-        //                     if (!method_exists($this, $nomSet)) {
-        //                          // à nous de voir selon le niveau de restriction...                // throw new Exception("La méthode {$nomSet} n'existe pas");            
-        //                     }
-        //                     else {                
-        //                         // appel au set                
-        //                         $this->$nomSet($valeur);           
-        //                     }        
-        //                 }    
-        //             } 
-    public function __construct()
+        public function __construct()
     //public function __construct(array $init)
 
     {
@@ -169,33 +149,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Evaluation>
-     */
-    public function getFeedback(): Collection
-    {
-        return $this->feedback;
-    }
-
-    public function addFeedback(Evaluation $feedback): static
-    {
-        if (!$this->feedback->contains($feedback)) {
-            $this->feedback->add($feedback);
-            $feedback->setUserEval($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFeedback(Evaluation $feedback): static
-    {
-        if ($this->feedback->removeElement($feedback)) {
-            // set the owning side to null (unless already changed)
-            if ($feedback->getUserEval() === $this) {
-                $feedback->setUserEval(null);
-            }
-        }
-
-        return $this;
-    }
+    
 }
