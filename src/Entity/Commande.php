@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommandeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -23,32 +25,19 @@ class Commande
     #[ORM\Column(length: 50)]
     private ?string $statutCommande = null;
 
-    #[ORM\ManyToOne(inversedBy: 'commandesFournisseur')]
-    private ?Fournisseur $fournisseurCmd = null;
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?Fournisseur $commandeFournisseur = null;
 
-    #[ORM\OneToOne(inversedBy: 'commandesDet', cascade: ['persist', 'remove'])]
-    private ?DetailCommande $commandesDetail = null;
+    /**
+     * @var Collection<int, DetailCommande>
+     */
+    #[ORM\OneToMany(targetEntity: DetailCommande::class, mappedBy: 'commandesD')]
+    private Collection $commandeDetailCommande;
 
-        
-    public function __construct(array $init)
+    public function __construct()
     {
-        $this->hydrate($init);
+        $this->commandeDetailCommande = new ArrayCollection();
     }
-
-    public function hydrate(array $init)
-    {
-        foreach ($init as $propriete => $valeur) {
-            $nomSet = "set" . ucfirst($propriete);
-            if (!method_exists($this, $nomSet)) {
-                // à nous de voir selon le niveau de restriction...                // throw new Exception("La méthode {$nomSet} n'existe pas");            
-            } else {
-                // appel au set                
-                $this->$nomSet($valeur);
-            }
-        }
-    }
-
-
 
     public function getId(): ?int
     {
@@ -91,26 +80,44 @@ class Commande
         return $this;
     }
 
-    public function getFournisseurCmd(): ?Fournisseur
+    public function getCommandeFournisseur(): ?Fournisseur
     {
-        return $this->fournisseurCmd;
+        return $this->commandeFournisseur;
     }
 
-    public function setFournisseurCmd(?Fournisseur $fournisseurCmd): static
+    public function setCommandeFournisseur(?Fournisseur $commandeFournisseur): static
     {
-        $this->fournisseurCmd = $fournisseurCmd;
+        $this->commandeFournisseur = $commandeFournisseur;
 
         return $this;
     }
 
-    public function getCommandesDetail(): ?DetailCommande
+    /**
+     * @return Collection<int, DetailCommande>
+     */
+    public function getCommandeDetailCommande(): Collection
     {
-        return $this->commandesDetail;
+        return $this->commandeDetailCommande;
     }
 
-    public function setCommandesDetail(?DetailCommande $commandesDetail): static
+    public function addCommandeDetailCommande(DetailCommande $commandeDetailCommande): static
     {
-        $this->commandesDetail = $commandesDetail;
+        if (!$this->commandeDetailCommande->contains($commandeDetailCommande)) {
+            $this->commandeDetailCommande->add($commandeDetailCommande);
+            $commandeDetailCommande->setCommandesD($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeDetailCommande(DetailCommande $commandeDetailCommande): static
+    {
+        if ($this->commandeDetailCommande->removeElement($commandeDetailCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeDetailCommande->getCommandesD() === $this) {
+                $commandeDetailCommande->setCommandesD(null);
+            }
+        }
 
         return $this;
     }

@@ -42,12 +42,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 10)]
     private ?string $matricule = null;
 
+    /**
+     * @var Collection<int, Evaluation>
+     */
+    #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'user')]
+    private Collection $userEvaluation;
+
         public function __construct()
     //public function __construct(array $init)
 
     {
         $this->feedback = new ArrayCollection();
         //$this->hydrate($init); 
+        $this->userEvaluation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -145,6 +152,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setMatricule(string $matricule): static
     {
         $this->matricule = $matricule;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Evaluation>
+     */
+    public function getUserEvaluation(): Collection
+    {
+        return $this->userEvaluation;
+    }
+
+    public function addUserEvaluation(Evaluation $userEvaluation): static
+    {
+        if (!$this->userEvaluation->contains($userEvaluation)) {
+            $this->userEvaluation->add($userEvaluation);
+            $userEvaluation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserEvaluation(Evaluation $userEvaluation): static
+    {
+        if ($this->userEvaluation->removeElement($userEvaluation)) {
+            // set the owning side to null (unless already changed)
+            if ($userEvaluation->getUser() === $this) {
+                $userEvaluation->setUser(null);
+            }
+        }
 
         return $this;
     }

@@ -3,8 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\DetailCommandeRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: DetailCommandeRepository::class)]
@@ -21,34 +19,11 @@ class DetailCommande
     #[ORM\Column]
     private ?float $prixUnitaire = null;
 
-    /**
-     * @var Collection<int, Produit>
-     */
-    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'produitsDetail')]
-    private Collection $produitsDet;
+    #[ORM\ManyToOne(inversedBy: 'commandeDetailCommande')]
+    private ?Commande $commandesD = null;
 
-    #[ORM\OneToOne(mappedBy: 'commandesDetail', cascade: ['persist', 'remove'])]
-    private ?Commande $commandesDet = null;
-
-    //hydrate
-    public function hydrate(array $init)    
-    {        foreach ($init as $propriete => $valeur) 
-        {            $nomSet = "set" . ucfirst($propriete);
-                        if (!method_exists($this, $nomSet)) {
-                             // à nous de voir selon le niveau de restriction...                // throw new Exception("La méthode {$nomSet} n'existe pas");            
-                        }
-                        else {                
-                            // appel au set                
-                            $this->$nomSet($valeur);           
-                        }        
-                    }    
-                }    
-
-    public function __construct(array $init)
-    {
-        $this->produitsDet = new ArrayCollection();
-        $this->hydrate($init);
-    }
+    #[ORM\ManyToOne(inversedBy: 'produitDetailCommande')]
+    private ?Produit $produits = null;
 
     public function getId(): ?int
     {
@@ -79,54 +54,26 @@ class DetailCommande
         return $this;
     }
 
-    /**
-     * @return Collection<int, Produit>
-     */
-    public function getProduitsDet(): Collection
+    public function getCommandesD(): ?Commande
     {
-        return $this->produitsDet;
+        return $this->commandesD;
     }
 
-    public function addProduitsDet(Produit $produitsDet): static
+    public function setCommandesD(?Commande $commandesD): static
     {
-        if (!$this->produitsDet->contains($produitsDet)) {
-            $this->produitsDet->add($produitsDet);
-            $produitsDet->setProduitsDetail($this);
-        }
+        $this->commandesD = $commandesD;
 
         return $this;
     }
 
-    public function removeProduitsDet(Produit $produitsDet): static
+    public function getProduits(): ?Produit
     {
-        if ($this->produitsDet->removeElement($produitsDet)) {
-            // set the owning side to null (unless already changed)
-            if ($produitsDet->getProduitsDetail() === $this) {
-                $produitsDet->setProduitsDetail(null);
-            }
-        }
-
-        return $this;
+        return $this->produits;
     }
 
-    public function getCommandesDet(): ?Commande
+    public function setProduits(?Produit $produits): static
     {
-        return $this->commandesDet;
-    }
-
-    public function setCommandesDet(?Commande $commandesDet): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($commandesDet === null && $this->commandesDet !== null) {
-            $this->commandesDet->setCommandesDetail(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($commandesDet !== null && $commandesDet->getCommandesDetail() !== $this) {
-            $commandesDet->setCommandesDetail($this);
-        }
-
-        $this->commandesDet = $commandesDet;
+        $this->produits = $produits;
 
         return $this;
     }

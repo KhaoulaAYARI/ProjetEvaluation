@@ -19,11 +19,11 @@ class Evaluation
     #[ORM\Column(length: 255)]
     private ?string $commentaire = null;
 
-    #[ORM\ManyToOne(inversedBy: 'evaluationsFournisseur')]
-    private ?Fournisseur $fournisseurEval = null;
+    #[ORM\ManyToOne(inversedBy: 'userEvaluation')]
+    private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'feedback')]
-    private ?User $userEval = null;
+    #[ORM\ManyToOne(inversedBy: 'evaluations')]
+    private ?Fournisseur $evaluationFournisseur = null;
 
     public function getId(): ?int
     {
@@ -54,26 +54,26 @@ class Evaluation
         return $this;
     }
 
-    public function getFournisseurEval(): ?Fournisseur
+    public function getUser(): ?User
     {
-        return $this->fournisseurEval;
+        return $this->user;
     }
 
-    public function setFournisseurEval(?Fournisseur $fournisseurEval): static
+    public function setUser(?User $user): static
     {
-        $this->fournisseurEval = $fournisseurEval;
+        $this->user = $user;
 
         return $this;
     }
 
-    public function getUserEval(): ?User
+    public function getEvaluationFournisseur(): ?Fournisseur
     {
-        return $this->userEval;
+        return $this->evaluationFournisseur;
     }
 
-    public function setUserEval(?User $userEval): static
+    public function setEvaluationFournisseur(?Fournisseur $evaluationFournisseur): static
     {
-        $this->userEval = $userEval;
+        $this->evaluationFournisseur = $evaluationFournisseur;
 
         return $this;
     }

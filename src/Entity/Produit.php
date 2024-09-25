@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProduitRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProduitRepository::class)]
@@ -13,69 +15,42 @@ class Produit
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $matriculeProduit = null;
+    #[ORM\Column(length: 10)]
+    private ?string $matricule = null;
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?float $prixProduit = null;
+    private ?float $prix = null;
 
-    #[ORM\ManyToOne(inversedBy: 'produitsFournisseur')]
-    private ?Fournisseur $produitsF = null;
+    /**
+     * @var Collection<int, DetailCommande>
+     */
+    #[ORM\OneToMany(targetEntity: DetailCommande::class, mappedBy: 'produits')]
+    private Collection $produitDetailCommande;
 
+    #[ORM\ManyToOne(inversedBy: 'produitsF')]
+    private ?Fournisseur $produitFournisseur = null;
 
-// //j'ai ajouté la methode setFournisseur
-    private $fournisseur;
-
-    public function hydrate(array $init)
+    public function __construct()
     {
-        foreach ($init as $propriete => $valeur) {
-            $nomSet = "set" . ucfirst($propriete);
-            if (!method_exists($this, $nomSet)) {
-                // à nous de voir selon le niveau de restriction...                // throw new Exception("La méthode {$nomSet} n'existe pas");            
-            } else {
-                // appel au set                
-                $this->$nomSet($valeur);
-            }
-        }
+        $this->produitDetailCommande = new ArrayCollection();
     }
-
-    
-    public function __construct(array $init)
-    {
-        $this->hydrate($init);
-    }
-
-
-    public function setFournisseur(Fournisseur $fournisseur): void
-    {
-        $this->fournisseur = $fournisseur;
-    }
-// //j'ai ajouté la methode setDetailCommande
-
-    private $detailCommande;
-
-    public function setDetailCommande(DetailCommande $detailCommande): void
-    {
-        $this->detailCommande = $$detailCommande;
-    }
-
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getMatriculeProduit(): ?string
+    public function getMatricule(): ?string
     {
-        return $this->matriculeProduit;
+        return $this->matricule;
     }
 
-    public function setMatriculeProduit(string $matriculeProduit): static
+    public function setMatricule(string $matricule): static
     {
-        $this->matriculeProduit = $matriculeProduit;
+        $this->matricule = $matricule;
 
         return $this;
     }
@@ -92,29 +67,57 @@ class Produit
         return $this;
     }
 
-    public function getPrixProduit(): ?float
+    public function getPrix(): ?float
     {
-        return $this->prixProduit;
+        return $this->prix;
     }
 
-    public function setPrixProduit(float $prixProduit): static
+    public function setPrix(float $prix): static
     {
-        $this->prixProduit = $prixProduit;
+        $this->prix = $prix;
 
         return $this;
     }
 
-    public function getProduitsF(): ?Fournisseur
+    /**
+     * @return Collection<int, DetailCommande>
+     */
+    public function getProduitDetailCommande(): Collection
     {
-        return $this->produitsF;
+        return $this->produitDetailCommande;
     }
 
-    public function setProduitsF(?Fournisseur $produitsF): static
+    public function addProduitDetailCommande(DetailCommande $produitDetailCommande): static
     {
-        $this->produitsF = $produitsF;
+        if (!$this->produitDetailCommande->contains($produitDetailCommande)) {
+            $this->produitDetailCommande->add($produitDetailCommande);
+            $produitDetailCommande->setProduits($this);
+        }
 
         return $this;
     }
 
+    public function removeProduitDetailCommande(DetailCommande $produitDetailCommande): static
+    {
+        if ($this->produitDetailCommande->removeElement($produitDetailCommande)) {
+            // set the owning side to null (unless already changed)
+            if ($produitDetailCommande->getProduits() === $this) {
+                $produitDetailCommande->setProduits(null);
+            }
+        }
 
+        return $this;
+    }
+
+    public function getProduitFournisseur(): ?Fournisseur
+    {
+        return $this->produitFournisseur;
+    }
+
+    public function setProduitFournisseur(?Fournisseur $produitFournisseur): static
+    {
+        $this->produitFournisseur = $produitFournisseur;
+
+        return $this;
+    }
 }

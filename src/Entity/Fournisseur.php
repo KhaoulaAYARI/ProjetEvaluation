@@ -18,52 +18,36 @@ class Fournisseur
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresse = null;
 
-    #[ORM\Column(length: 50)]
+    #[ORM\Column(length: 255)]
     private ?string $email = null;
-
-    /**
-     * @var Collection<int, Produit>
-     */
-    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'produitsF')]
-    private Collection $produitsFournisseur;
-
-    /**
-     * @var Collection<int, Evaluation>
-     */
-    #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'fournisseurEval', cascade: ['persist', 'remove'])]
-    private Collection $evaluationsFournisseur;
 
     /**
      * @var Collection<int, Commande>
      */
-    #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'fournisseurCmd')]
-    private Collection $commandesFournisseur;
+    #[ORM\OneToMany(targetEntity: Commande::class, mappedBy: 'commandeFournisseur', cascade: ['persist', 'remove'])]
+    private Collection $commandes;
 
-    //hydrate
-    public function hydrate(array $init)
+    /**
+     * @var Collection<int, Produit>
+     */
+    #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'produitFournisseur', cascade: ['persist', 'remove'])]
+    private Collection $produitsF;
+
+    /**
+     * @var Collection<int, Evaluation>
+     */
+    #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'evaluationFournisseur', cascade: ['persist', 'remove'])]
+    private Collection $evaluations;
+
+    public function __construct()
     {
-        foreach ($init as $propriete => $valeur) {
-            $nomSet = "set" . ucfirst($propriete);
-            if (!method_exists($this, $nomSet)) {
-                // à nous de voir selon le niveau de restriction...                // throw new Exception("La méthode {$nomSet} n'existe pas");            
-            } else {
-                // appel au set                
-                $this->$nomSet($valeur);
-            }
-        }
+        $this->commandes = new ArrayCollection();
+        $this->produitsF = new ArrayCollection();
+        $this->evaluations = new ArrayCollection();
     }
-    public function __construct(array $init)
-    {
-        $this->produitsFournisseur = new ArrayCollection();
-        $this->evaluationsFournisseur = new ArrayCollection();
-        $this->commandesFournisseur = new ArrayCollection();
-        $this->hydrate($init);
-    }
-
-
 
     public function getId(): ?int
     {
@@ -87,7 +71,7 @@ class Fournisseur
         return $this->adresse;
     }
 
-    public function setAdresse(string $adresse): static
+    public function setAdresse(?string $adresse): static
     {
         $this->adresse = $adresse;
 
@@ -107,29 +91,59 @@ class Fournisseur
     }
 
     /**
-     * @return Collection<int, Produit>
+     * @return Collection<int, Commande>
      */
-    public function getProduitsFournisseur(): Collection
+    public function getCommandes(): Collection
     {
-        return $this->produitsFournisseur;
+        return $this->commandes;
     }
 
-    public function addProduitsFournisseur(Produit $produitsFournisseur): static
+    public function addCommande(Commande $commande): static
     {
-        if (!$this->produitsFournisseur->contains($produitsFournisseur)) {
-            $this->produitsFournisseur->add($produitsFournisseur);
-            $produitsFournisseur->setProduitsF($this);
+        if (!$this->commandes->contains($commande)) {
+            $this->commandes->add($commande);
+            $commande->setCommandeFournisseur($this);
         }
 
         return $this;
     }
 
-    public function removeProduitsFournisseur(Produit $produitsFournisseur): static
+    public function removeCommande(Commande $commande): static
     {
-        if ($this->produitsFournisseur->removeElement($produitsFournisseur)) {
+        if ($this->commandes->removeElement($commande)) {
             // set the owning side to null (unless already changed)
-            if ($produitsFournisseur->getProduitsF() === $this) {
-                $produitsFournisseur->setProduitsF(null);
+            if ($commande->getCommandeFournisseur() === $this) {
+                $commande->setCommandeFournisseur(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduitsF(): Collection
+    {
+        return $this->produitsF;
+    }
+
+    public function addProduitsF(Produit $produitsF): static
+    {
+        if (!$this->produitsF->contains($produitsF)) {
+            $this->produitsF->add($produitsF);
+            $produitsF->setProduitFournisseur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduitsF(Produit $produitsF): static
+    {
+        if ($this->produitsF->removeElement($produitsF)) {
+            // set the owning side to null (unless already changed)
+            if ($produitsF->getProduitFournisseur() === $this) {
+                $produitsF->setProduitFournisseur(null);
             }
         }
 
@@ -139,57 +153,27 @@ class Fournisseur
     /**
      * @return Collection<int, Evaluation>
      */
-    public function getEvaluationsFournisseur(): Collection
+    public function getEvaluations(): Collection
     {
-        return $this->evaluationsFournisseur;
+        return $this->evaluations;
     }
 
-    public function addEvaluationsFournisseur(Evaluation $evaluationsFournisseur): static
+    public function addEvaluation(Evaluation $evaluation): static
     {
-        if (!$this->evaluationsFournisseur->contains($evaluationsFournisseur)) {
-            $this->evaluationsFournisseur->add($evaluationsFournisseur);
-            $evaluationsFournisseur->setFournisseurEval($this);
+        if (!$this->evaluations->contains($evaluation)) {
+            $this->evaluations->add($evaluation);
+            $evaluation->setEvaluationFournisseur($this);
         }
 
         return $this;
     }
 
-    public function removeEvaluationsFournisseur(Evaluation $evaluationsFournisseur): static
+    public function removeEvaluation(Evaluation $evaluation): static
     {
-        if ($this->evaluationsFournisseur->removeElement($evaluationsFournisseur)) {
+        if ($this->evaluations->removeElement($evaluation)) {
             // set the owning side to null (unless already changed)
-            if ($evaluationsFournisseur->getFournisseurEval() === $this) {
-                $evaluationsFournisseur->setFournisseurEval(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getCommandesFournisseur(): Collection
-    {
-        return $this->commandesFournisseur;
-    }
-
-    public function addCommandesFournisseur(Commande $commandesFournisseur): static
-    {
-        if (!$this->commandesFournisseur->contains($commandesFournisseur)) {
-            $this->commandesFournisseur->add($commandesFournisseur);
-            $commandesFournisseur->setFournisseurCmd($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCommandesFournisseur(Commande $commandesFournisseur): static
-    {
-        if ($this->commandesFournisseur->removeElement($commandesFournisseur)) {
-            // set the owning side to null (unless already changed)
-            if ($commandesFournisseur->getFournisseurCmd() === $this) {
-                $commandesFournisseur->setFournisseurCmd(null);
+            if ($evaluation->getEvaluationFournisseur() === $this) {
+                $evaluation->setEvaluationFournisseur(null);
             }
         }
 
