@@ -47,15 +47,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'user')]
     private Collection $userEvaluation;
-
-        public function __construct()
-    //public function __construct(array $init)
-
-    {
-        $this->feedback = new ArrayCollection();
-        //$this->hydrate($init); 
-        $this->userEvaluation = new ArrayCollection();
-    }
+    /////Inserer le Hydrate
+    // public function hydrate(array $init)
+    // {        
+    //     foreach ($init as $propriete => $valeur) 
+    //     {   $nomSet = "set" . ucfirst($propriete);
+    //         if (!method_exists($this, $nomSet)) 
+    //         {                
+    //             // à nous de voir selon le niveau de restriction...                
+    //             // throw new Exception("La méthode {$nomSet} n'existe pas");
+    //         }          
+    //         else {               
+    //             // appel au set                
+    //             $this->$nomSet($valeur);            
+    //         }        
+    //     }    
+    // } 
+    public function __construct()  //array $init
+  {
+  
+        $this->userEvaluation = new ArrayCollection();   
+        //$this->hydrate($init);
+  } 
+        
 
     public function getId(): ?int
     {

@@ -1,4 +1,4 @@
-<?php ///////OLD
+<?php
 
 namespace App\DataFixtures;
 
