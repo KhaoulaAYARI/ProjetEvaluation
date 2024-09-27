@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Formulaire  insertion DetailCommande
+{{ form_start(formulaireDetailCommande) }}
+{{ form_row(formulaireDetailCommande.quantite) }}
+{{ form_row(formulaireDetailCommande.prixUnitaire) }}
+{{ form_row(formulaireDetailCommande.commandesD) }}
+{{ form_row(formulaireDetailCommande.produits) }}
+
+<input type="submit" value="Inserer">
+{{ form_end(formulaireDetailCommande) }}
+
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Formulaire insertion Evaluation
+{{ form_start(formulaireEvaluation) }}
+{{ form_row(formulaireEvaluation.note) }}
+{{ form_row(formulaireEvaluation.commentaire) }}
+{{ form_row(formulaireEvaluation.user) }}
+{{ form_row(formulaireEvaluation.evaluationFournisseur) }}
+<input type="submit" value="Inserer">
+{{ form_end(formulaireEvaluation) }}
+
+{% endblock %}
