@@ -52,7 +52,7 @@ class Commande
      }    
      
     
-    public function __construct(array $init)
+    public function __construct(array $init=[])
     {
         $this->commandeDetailCommande = new ArrayCollection();
         $this->hydrate($init);

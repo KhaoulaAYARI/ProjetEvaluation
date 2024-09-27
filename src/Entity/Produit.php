@@ -49,7 +49,7 @@ class Produit
              }        
          }    
      } 
-     public function __construct(array $init)
+     public function __construct(array $init=[])
    {
         $this->produitDetailCommande = new ArrayCollection();   
         $this->hydrate($init);
