@@ -27,7 +27,7 @@ class DetailCommandeFixtures extends Fixture implements DependentFixtureInterfac
         $detailCommande = new DetailCommande(
             [
                 'quantite'=>rand(5,100),
-                'prixUnitaire'=>$faker->randomFloat(2, 10, 100),
+                'prixUnitaire'=>$faker->randomFloat(2, 10, 30),
             ]
         );
 

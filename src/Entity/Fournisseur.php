@@ -58,7 +58,7 @@ class Fournisseur
             }        
         }    
     }    
-    public function __construct(array $init)
+    public function __construct(array $init=[])
     {
         $this->commandes = new ArrayCollection();
         $this->produitsF = new ArrayCollection();
