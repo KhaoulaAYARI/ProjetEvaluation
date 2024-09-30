@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Formulaire Update Commande
+{{ form_start(form) }}
+{{ form_row(form.numero) }}
+{{ form_row(form.dateCommande) }}
+{{ form_row(form.statutCommande) }}
+{{ form_row(form.commandeFournisseur) }}
+
+<input type="submit" value="Update !">
+{{ form_end(form) }}
+
+
+{% endblock %}

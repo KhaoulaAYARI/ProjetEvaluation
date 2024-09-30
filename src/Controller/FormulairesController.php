@@ -12,10 +12,12 @@ use App\Form\EvaluationType;
 use App\Form\FournisseurType;
 use App\Entity\DetailCommande;
 use App\Form\DetailCommandeType;
-use App\Repository\FournisseurRepository;
 use App\Repository\ProduitRepository;
+use App\Repository\CommandeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\FournisseurRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use PHPUnit\TextUI\Command;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -223,6 +225,70 @@ class FormulairesController extends AbstractController
         $vars=['formulaireCommande'=>$form];
         return $this->render('formulaires/commande_inserer.html.twig', $vars);
     }
+
+
+
+
+                ///////////////////////////////
+    ///////////FORMULAIRE UPDATE COMMANDE///////////
+                ///////////////////////////////
+
+
+    //action qui affiche toutes les commandes
+    #[Route('/formulaires/touteslescommandes/afficher', name:'afficherToutesCommandes')]
+    public function afficherToutesCommandes(ManagerRegistry $doctrine){
+    //obtenier toutes les commandes de la BD
+    $em=$doctrine->getManager();
+    $rep=$em->getRepository(Commande::class);
+    $toutescommandes=$rep->findAll();
+    //dd($toutescommandes);
+    $vars=['toutescommandes'=>$toutescommandes];
+    //Envoyer l'array de commandes à la vue
+    return $this->render('formulaires/toutescommandes_afficher.html.twig', $vars);}
+
+   //update des commandes (affichage et traitement de formulaire)
+    #[Route('/formulaires/touteslescommandes/update/{id}', name:'updateCommande')]
+        public function updateCommande(Request $req, CommandeRepository $rep, EntityManagerInterface $em){
+            $id=$req->get('id');
+            //chercher la commande
+            $commande=$rep->find($id);
+            //creer le form    
+            $form=$this->createForm(CommandeType::class, $commande);
+            $form->handleRequest($req);
+            if ($form->isSubmitted() ) {
+                //on a cliqué submit
+                $em->flush(); 
+                //dd($fournisseur);
+            }
+            $vars=['form'=>$form];
+            return $this->render('formulaires/toutescommandes_update.html.twig', $vars);
+
+        }
+
+
+
+
+                     ///////////////////////////////
+            ///////////FORMULAIRE DELETE PRODUIT///////////
+                    ///////////////////////////////
+
+
+        //delete des commandes (affichage et traitement de formulaire)
+        #[Route('/formulaires/touteslescommandes/delete/{id}', name:'deleteCommande')]
+        public function deleteCommande(Request $req, CommandeRepository $rep, EntityManagerInterface $em ){
+            //obtenier l'id de commande a effacer
+            $id=$req->get('id');
+            //obtenier la commande de la BD
+            $commande=$rep->find($id);
+            //lancer remove
+            $em->remove($commande);
+            //lancer flush
+            $em->flush();
+            //redirection vers l'affichage
+            return $this->redirectToRoute('afficherToutesCommandes');
+        }
+
+
 
 
                 ///////////////////////////////

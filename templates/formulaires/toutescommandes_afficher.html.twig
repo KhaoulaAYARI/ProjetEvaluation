@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Vue qui affiche toutes les commandes
+<ul>
+{% for commande in toutescommandes %}
+<li>{{commande.numero }} - {{commande.id}} 
+
+
+<a href="{{ path ('updateCommande', {id:commande.id}) }}">Update</a>
+<a href="{{ path ('deleteCommande', {id:commande.id}) }}">Delete</a>
+</li>
+ {% endfor %}
+</ul>
+
+{% endblock %}
