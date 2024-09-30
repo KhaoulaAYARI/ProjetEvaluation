@@ -12,6 +12,8 @@ use App\Form\EvaluationType;
 use App\Form\FournisseurType;
 use App\Entity\DetailCommande;
 use App\Form\DetailCommandeType;
+use App\Repository\FournisseurRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,6 +29,7 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/index.html.twig');
     }
 
+    ///////////FORMULAIRE INSERER FOURNISSEUR///////////
     #[Route('/formulaires/fournisseur/afficher')]
     public function afficherfournisseur(Request $req, ManagerRegistry $doctrine){
 
@@ -52,9 +55,60 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/fournisseur_afficher.html.twig', $vars);
         
     }
+    ///////////FORMULAIRE UPDATE FOURNISSEUR///////////
+    //action qui affiche tous les fournisseurs
+    #[Route('/formulaires/touslesfournisseurs/afficher', name:'afficherTousFournisseurs')]
+    public function afficherTousFournisseurs(ManagerRegistry $doctrine){
+    //obtenier tous les fournisseurs de la BD
+    $em=$doctrine->getManager();
+    $rep=$em->getRepository(fournisseur::class);
+    $tousfournisseurs=$rep->findAll();
+    //dd($tousfournisseurs);
+    $vars=['tousfournisseurs'=>$tousfournisseurs];
+    //Envoyer l'array de fournisseurs à la vue
+    return $this->render('formulaires/tousfournisseurs_afficher.html.twig', $vars);}
+
+   //update des fournissurs (affichage et traitement de formulaire)
+    #[Route('/formulaires/touslesfournisseurs/update/{id}', name:'updateFournisseur')]
+        public function updateFournisseur(Request $req, FournisseurRepository $rep, EntityManagerInterface $em){
+            $id=$req->get('id');
+            //chercher le fournisseur
+            $fournisseur=$rep->find($id);
+            //creer le form    
+            $form=$this->createForm(FournisseurType::class, $fournisseur);
+            $form->handleRequest($req);
+            if ($form->isSubmitted() ) {
+                //on a cliqué submit
+                $em->flush(); 
+                //dd($fournisseur);
+            }
+            $vars=['form'=>$form];
+            return $this->render('formulaires/tousfournisseurs_update.html.twig', $vars);
+
+        }
+
+            ///////////FORMULAIRE DELETE FOURNISSEUR///////////
+
+        //delete des fournissurs (affichage et traitement de formulaire)
+    #[Route('/formulaires/touslesfournisseurs/delete/{id}', name:'deleteFournisseur')]
+    public function deleteFournisseur(Request $req, FournisseurRepository $rep, EntityManagerInterface $em ){
+        //obtenier l'id de fournisseur a effacer
+        $id=$req->get('id');
+        //obtenier le fournisseur de la BD
+        $fournisseur=$rep->find($id);
+        //lancer remove
+        $em->remove($fournisseur);
+        //lancer flush
+        $em->flush();
+        //redirection vers l'affichage
+        return $this->redirectToRoute('afficherTousFournisseurs');
+    }
+        
+
+
     ///////////FORMULAIRE INSERER PRODUIT///////////
     #[Route('/formulaires/produit/inserer')]
-    public function insererProduit(Request $req, ManagerRegistry $doctrine){
+        public function insererProduit(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
         $produit = new Produit();
         //creer le form et associer l'entité au form

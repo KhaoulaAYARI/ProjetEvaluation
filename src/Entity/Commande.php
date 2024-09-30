@@ -31,7 +31,7 @@ class Commande
     /**
      * @var Collection<int, DetailCommande>
      */
-    #[ORM\OneToMany(targetEntity: DetailCommande::class, mappedBy: 'commandesD')]
+    #[ORM\OneToMany(targetEntity: DetailCommande::class, mappedBy: 'commandesD', cascade: ['persist', 'remove'])]
     private Collection $commandeDetailCommande;
 
      /////Inserer le Hydrate

@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var Collection<int, Evaluation>
      */
-    #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'user')]
+    #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'user', cascade: ['persist', 'remove'])]
     private Collection $userEvaluation;
     /////Inserer le Hydrate
     // public function hydrate(array $init)

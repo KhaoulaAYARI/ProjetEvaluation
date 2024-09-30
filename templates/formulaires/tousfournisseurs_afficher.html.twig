@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Vue qui affiche tous les fournisseurs
+<ul>
+{% for fournisseur in tousfournisseurs %}
+<li>{{fournisseur.nom }} - {{fournisseur.id}} 
+<a href="{{ path ('updateFournisseur', {id:fournisseur.id}) }}">Update</a>
+<a href="{{ path ('deleteFournisseur', {id:fournisseur.id}) }}">Delete</a>
+</li>
+ {% endfor %}
+</ul>
+
+{% endblock %}
