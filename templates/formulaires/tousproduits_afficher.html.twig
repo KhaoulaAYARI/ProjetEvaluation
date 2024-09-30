@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Vue qui affiche tous les produits
+<ul>
+{% for produit in touslesproduits %}
+<li>{{produit.matricule }} - {{produit.id}} 
+<a href="{{ path ('updateProduit', {id:produit.id}) }}">Update</a>
+<a href="{{ path ('deleteProduit', {id:produit.id}) }}">Delete</a>
+</li>
+ {% endfor %}
+</ul>
+
+{% endblock %}

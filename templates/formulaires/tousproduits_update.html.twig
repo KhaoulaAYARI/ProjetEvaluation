@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Formulaire Update Produit
+{{ form_start(form) }}
+{{ form_row(form.matricule) }}
+{{ form_row(form.description) }}
+{{ form_row(form.prix) }}
+{{ form_row(form.produitFournisseur) }}
+
+<input type="submit" value="Update !">
+{{ form_end(form) }}
+
+
+{% endblock %}

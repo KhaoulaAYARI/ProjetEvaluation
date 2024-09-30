@@ -13,6 +13,7 @@ use App\Form\FournisseurType;
 use App\Entity\DetailCommande;
 use App\Form\DetailCommandeType;
 use App\Repository\FournisseurRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,7 +30,11 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/index.html.twig');
     }
 
+                ///////////////////////////////
     ///////////FORMULAIRE INSERER FOURNISSEUR///////////
+                ///////////////////////////////
+
+
     #[Route('/formulaires/fournisseur/afficher')]
     public function afficherfournisseur(Request $req, ManagerRegistry $doctrine){
 
@@ -55,7 +60,12 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/fournisseur_afficher.html.twig', $vars);
         
     }
+
+                ///////////////////////////////
     ///////////FORMULAIRE UPDATE FOURNISSEUR///////////
+                ///////////////////////////////
+
+
     //action qui affiche tous les fournisseurs
     #[Route('/formulaires/touslesfournisseurs/afficher', name:'afficherTousFournisseurs')]
     public function afficherTousFournisseurs(ManagerRegistry $doctrine){
@@ -87,7 +97,11 @@ class FormulairesController extends AbstractController
 
         }
 
+
+                    ///////////////////////////////
             ///////////FORMULAIRE DELETE FOURNISSEUR///////////
+                    ///////////////////////////////
+
 
         //delete des fournissurs (affichage et traitement de formulaire)
     #[Route('/formulaires/touslesfournisseurs/delete/{id}', name:'deleteFournisseur')]
@@ -105,8 +119,11 @@ class FormulairesController extends AbstractController
     }
         
 
-
+            /////////////////////////////// 
     ///////////FORMULAIRE INSERER PRODUIT///////////
+            ///////////////////////////////
+
+
     #[Route('/formulaires/produit/inserer')]
         public function insererProduit(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
@@ -125,7 +142,70 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/produit_inserer.html.twig', $vars);
     }
 
+
+
+            ///////////////////////////////
+    ///////////FORMULAIRE UPDATE Produit///////////
+                ///////////////////////////////
+
+
+    //action qui affiche tous les produits
+    #[Route('/formulaires/touslesproduits/afficher', name:'afficherTousProduits')]
+    public function afficherTousProduits(ManagerRegistry $doctrine){
+    //obtenier tous les produits de la BD
+        $em=$doctrine->getManager();
+        $rep=$em->getRepository(Produit::class);
+        $touslesproduits=$rep->findAll();
+
+        $vars=['touslesproduits'=>$touslesproduits];
+    //Envoyer l'array de produits à la vue
+    return $this->render('formulaires/tousproduits_afficher.html.twig', $vars);}
+
+    //update des produits (affichage et traitement de formulaire)
+    #[Route('/formulaires/touslesproduits/update/{id}', name:'updateProduit')]
+        public function updateProduit(Request $req, ProduitRepository $rep, EntityManagerInterface $em){
+            $id=$req->get('id');
+            //chercher le produit
+            $produit=$rep->find($id);
+            //creer le form    
+            $form=$this->createForm(ProduitType::class, $produit);
+            $form->handleRequest($req);
+            if ($form->isSubmitted() ) {
+                //on a cliqué submit
+                $em->flush(); 
+                //dd($fournisseur);
+            }
+            $vars=['form'=>$form];
+            return $this->render('formulaires/tousproduits_update.html.twig', $vars);
+
+        }
+
+                    ///////////////////////////////
+            ///////////FORMULAIRE DELETE PRODUIT///////////
+                    ///////////////////////////////
+
+
+        //delete des produits (affichage et traitement de formulaire)
+        #[Route('/formulaires/touslesproduits/delete/{id}', name:'deleteProduit')]
+        public function deleteProduit(Request $req, ProduitRepository $rep, EntityManagerInterface $em ){
+            //obtenier l'id de produit a effacer
+            $id=$req->get('id');
+            //obtenier le produit de la BD
+            $produit=$rep->find($id);
+            //lancer remove
+            $em->remove($produit);
+            //lancer flush
+            $em->flush();
+            //redirection vers l'affichage
+            return $this->redirectToRoute('afficherTousProduits');
+        }
+
+
+                ///////////////////////////////
     ///////////FORMULAIRE INSERER COMMANDE///////////
+                ///////////////////////////////
+
+
     #[Route('/formulaires/commande/inserer')]
     public function insererCommande(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
@@ -144,7 +224,12 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/commande_inserer.html.twig', $vars);
     }
 
+
+                ///////////////////////////////
     ///////////FORMULAIRE INSERER DETAILCOMMANDE///////////
+                ///////////////////////////////
+
+
     #[Route('/formulaires/detailcommande/inserer')]
     public function insererDetailCommande(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
@@ -163,7 +248,13 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/detailcommande_inserer.html.twig', $vars);
     }
 
+
+            /////////////////////////////// 
     ///////////FORMULAIRE INSERER Evaluation///////////
+                ///////////////////////////////
+
+
+
     #[Route('/formulaires/evaluation/inserer')]
     public function insererEvaluation(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
