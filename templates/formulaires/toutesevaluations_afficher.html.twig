@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Vue qui affiche toutes les evaluations
+<ul>
+{% for evaluation in toutesevaluations %}
+<li>{{evaluation.id}} - {{evaluation.commentaire}}
+
+<a href="{{ path ('updateEvaluation', {id:evaluation.id}) }}">Update</a>
+
+<a href="{{ path ('deleteEvaluation', {id:evaluation.id}) }}">Delete</a>
+</li> 
+ {% endfor %}
+</ul>
+
+{% endblock %}

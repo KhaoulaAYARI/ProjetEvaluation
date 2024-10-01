@@ -14,6 +14,8 @@ use App\Entity\DetailCommande;
 use App\Form\DetailCommandeType;
 use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
+use App\Repository\DetailCommandeRepository;
+use App\Repository\EvaluationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FournisseurRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -269,7 +271,7 @@ class FormulairesController extends AbstractController
 
 
                      ///////////////////////////////
-            ///////////FORMULAIRE DELETE PRODUIT///////////
+            ///////////FORMULAIRE DELETE COMMANDE///////////
                     ///////////////////////////////
 
 
@@ -315,6 +317,67 @@ class FormulairesController extends AbstractController
     }
 
 
+
+                ///////////////////////////////
+    ///////////FORMULAIRE UPDATE DETAILCOMMANDE///////////
+                ///////////////////////////////
+
+
+    //action qui affiche tous les DETAILSCOMANDES
+    #[Route('/formulaires/touslesdetailscommandes/afficher', name:'afficherTousdetailsCommandes')]
+    public function afficherTousDetailsCommandes(ManagerRegistry $doctrine){
+    //obtenier tous les details commandes de la BD
+        $em=$doctrine->getManager();
+        $rep=$em->getRepository(DetailCommande::class);
+        $touslesdetailscommandes=$rep->findAll();
+
+        $vars=['touslesdetailscommandes'=>$touslesdetailscommandes];
+    //Envoyer l'array de lesdetailscommandes à la vue
+    return $this->render('formulaires/touslesdetailscommandes_afficher.html.twig', $vars);}
+
+    //update des produits (affichage et traitement de formulaire)
+    #[Route('/formulaires/touslesdetailscommandes/update/{id}', name:'updateDetailsCommande')]
+        public function updateDetailsCommande(Request $req, DetailCommandeRepository $rep, EntityManagerInterface $em){
+            $id=$req->get('id');
+            //chercher le detailcommande
+            $detailcommande=$rep->find($id);
+            //creer le form    
+            $form=$this->createForm(DetailCommandeType::class, $detailcommande);
+            $form->handleRequest($req);
+            if ($form->isSubmitted() ) {
+                //on a cliqué submit
+                $em->flush(); 
+                //dd($fournisseur);
+            }
+            $vars=['form'=>$form];
+            return $this->render('formulaires/touslesdetailscommandes_update.html.twig', $vars);
+
+        }
+                    ///////////////////////////////
+            ///////////FORMULAIRE DELETE DETAIL COMMANDE///////////
+                    ///////////////////////////////
+
+
+        //delete des detailscommandes (affichage et traitement de formulaire)
+        #[Route('/formulaires/touslesdetailscommandes/delete/{id}', name:'deleteDetailsCommande')]
+        public function deleteDetailCommande(Request $req, DetailCommandeRepository $rep, EntityManagerInterface $em ){
+            //obtenier l'id de detail commande a effacer
+            $id=$req->get('id');
+            //obtenier le detail commande de la BD
+            $detailcommande=$rep->find($id);
+            //lancer remove
+            $em->remove($detailcommande);
+            //lancer flush
+            $em->flush();
+            //redirection vers l'affichage
+            return $this->redirectToRoute('afficherTousdetailsCommandes');
+        }
+
+
+
+
+
+
             /////////////////////////////// 
     ///////////FORMULAIRE INSERER Evaluation///////////
                 ///////////////////////////////
@@ -338,6 +401,70 @@ class FormulairesController extends AbstractController
         $vars=['formulaireEvaluation'=>$form];
         return $this->render('formulaires/evaluation_inserer.html.twig', $vars);
     }
+
+
+                ///////////////////////////////
+    ///////////FORMULAIRE UPDATE EVALUATION///////////
+                ///////////////////////////////
+
+
+    //action qui affiche toutes les evaluations
+    #[Route('/formulaires/touteslesevaluations/afficher', name:'afficherToutesEvaluation')]
+    public function afficherToutesEvaluations (ManagerRegistry $doctrine){
+    //obtenier toutes les evaluations de la BD
+    $em=$doctrine->getManager();
+    $rep=$em->getRepository(Evaluation::class);
+    $toutesevaluations=$rep->findAll();
+    //dd($tousfournisseurs);
+    $vars=['toutesevaluations'=>$toutesevaluations];
+    //Envoyer l'array des evaluations à la vue
+    return $this->render('formulaires/toutesevaluations_afficher.html.twig', $vars);}
+
+   //update des fournissurs (affichage et traitement de formulaire)
+    #[Route('/formulaires/touteslesevaluations/update/{id}', name:'updateEvaluation')]
+        public function updateEvaluation(Request $req, EvaluationRepository $rep, EntityManagerInterface $em){
+            $id=$req->get('id');
+            //chercher l'evaluation
+            $evaluation=$rep->find($id);
+            //creer le form    
+            $form=$this->createForm(EvaluationType::class, $evaluation);
+            $form->handleRequest($req);
+            if ($form->isSubmitted() ) {
+                //on a cliqué submit
+                $em->flush(); 
+                //dd($fournisseur);
+            }
+            $vars=['form'=>$form];
+            return $this->render('formulaires/toutesevaluations_update.html.twig', $vars);
+
+        }
+
+
+
+
+
+                    ///////////////////////////////
+            ///////////FORMULAIRE DELETE EVALUATION///////////
+                    ///////////////////////////////
+
+
+        //delete des commandes (affichage et traitement de formulaire)
+        #[Route('/formulaires/touteslesevaluations/delete/{id}', name:'deleteEvaluation')]
+        public function deleteevaluation(Request $req, EvaluationRepository $rep, EntityManagerInterface $em ){
+            //obtenier l'id de commande a effacer
+            $id=$req->get('id');
+            //obtenier la commande de la BD
+            $evaluation=$rep->find($id);
+            //lancer remove
+            $em->remove($evaluation);
+            //lancer flush
+            $em->flush();
+            //redirection vers l'affichage
+            return $this->redirectToRoute('afficherToutesEvaluation');
+        }
+           
+           
+        
 
 
 }

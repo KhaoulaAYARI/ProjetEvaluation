@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Formulaire Update Evaluations
+{{ form_start(form) }}
+{{ form_row(form.note) }}
+{{ form_row(form.commentaire) }}
+{{ form_row(form.user) }}
+{{ form_row(form.evaluationFournisseur) }}
+
+<input type="submit" value="Update !">
+{{ form_end(form) }}
+
+
+{% endblock %}

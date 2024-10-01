@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Vue qui affiche toutes les details commandes
+<ul>
+{% for detailcommande in touslesdetailscommandes %}
+<li>{{detailcommande.id}} 
+{# - {{detailcommande.quantite}} -{{detailcommande.prixUnitaire}}  #}
+
+
+<a href="{{ path ('updateDetailsCommande', {id:detailcommande.id}) }}">Update</a>
+
+<a href="{{ path ('deleteDetailsCommande', {id:detailcommande.id}) }}">Delete</a>
+</li>
+ {% endfor %}
+</ul>
+
+{% endblock %}
