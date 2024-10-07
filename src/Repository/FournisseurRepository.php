@@ -7,6 +7,8 @@ use App\Entity\Fournisseur;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
+
 /**
  * @extends ServiceEntityRepository<Fournisseur>
  */
