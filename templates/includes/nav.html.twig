@@ -2,22 +2,41 @@
 
 <nav>
        {# option publique #}
-       <a href="">Option1 publique</a>
+       <a href="{{path('fournisseur_filtre')}}"> Filtre fournisseurs </a>
+        {{ "\n"|nl2br }}  
+        {{ "\n"|nl2br }} 
+
         {# option pour admin #}
         {% if  is_granted('ROLE_ADMIN')  %}
-            <a href="">Option uniquement Admin</a>
+            <a href="{{path('app_register')}}">Formulaire enregistrement</a>
+            <a href="{{path('insererFournisseurs')}}">Inserer Fournisseur</a>
+            <a href="{{path('insererProduits')}}">Inserer Produits</a>
+            <a href="{{path('insererCommande')}}">Inserer Commandes</a>
+            <a href="{{path('insererDetailCommande')}}">Inserer DetailCommandes</a>
+            <a href="{{path('insererEvaluation')}}">Inserer Evaluation</a>
         {% endif %}
+        {{ "\n"|nl2br }}
+        {{ "\n"|nl2br }}
+
         {# option pour tous les users #}
         {% if  is_granted('ROLE_USER')  %}
-            <a href="">Option2 user</a>
-            <a href="">Option3 user</a>
+            
+            <a href="{{path('afficherTousFournisseurs')}}">updater Fournisseur</a>
+            <a href="{{path('afficherTousProduits')}}">updater Produits</a>
+            <a href="{{path('afficherToutesCommandes')}}">updater Commandes</a>
+            <a href="{{path('afficherTousdetailsCommandes')}}">updater DetailCommandes</a>
+            <a href="{{path('afficherToutesEvaluation')}}">updater Evaluation</a> 
         {% endif %}
+        {{ "\n"|nl2br }}
+        {{ "\n"|nl2br }}
 
 
        {% if app.user %}
             connecté: {{app.user.email}}
+            {{ "\n"|nl2br }}
             
             <a href="{{ path('app_logout')}}">Logout</a>
+            {{ "\n"|nl2br }}
         {% else %}
             <a href="{{ path('app_login')}}">Login</a>
        {% endif %}

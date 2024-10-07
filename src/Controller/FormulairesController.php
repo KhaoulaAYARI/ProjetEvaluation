@@ -39,7 +39,7 @@ class FormulairesController extends AbstractController
                 ///////////////////////////////
 
 
-    #[Route('/formulaires/fournisseur/afficher')]
+    #[Route('/formulaires/fournisseur/afficher', name:'insererFournisseurs')]
     public function afficherfournisseur(Request $req, ManagerRegistry $doctrine){
 
         //creer une entité vide
@@ -128,7 +128,7 @@ class FormulairesController extends AbstractController
             ///////////////////////////////
 
 
-    #[Route('/formulaires/produit/inserer')]
+    #[Route('/formulaires/produit/inserer', name:'insererProduits')]
         public function insererProduit(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
         $produit = new Produit();
@@ -210,7 +210,7 @@ class FormulairesController extends AbstractController
                 ///////////////////////////////
 
 
-    #[Route('/formulaires/commande/inserer')]
+    #[Route('/formulaires/commande/inserer', name:'insererCommande')]
     public function insererCommande(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
         $commande = new Commande();
@@ -298,7 +298,7 @@ class FormulairesController extends AbstractController
                 ///////////////////////////////
 
 
-    #[Route('/formulaires/detailcommande/inserer')]
+    #[Route('/formulaires/detailcommande/inserer', name:'insererDetailCommande')]
     public function insererDetailCommande(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
         $detailcommande = new DetailCommande();
@@ -384,7 +384,7 @@ class FormulairesController extends AbstractController
 
 
 
-    #[Route('/formulaires/evaluation/inserer')]
+    #[Route('/formulaires/evaluation/inserer', name:'insererEvaluation')]
     public function insererEvaluation(Request $req, ManagerRegistry $doctrine){
         //creer une entité vide
         $evaluation = new Evaluation();
