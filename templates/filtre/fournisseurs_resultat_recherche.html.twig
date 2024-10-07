@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+Resultat de la recherche
+
+{% for fournisseur in fournisseurs %}
+Nom: {{fournisseur.nom}}
+Email: {{fournisseur.email}}
+
+Adresse: {{fournisseur.adresse}}
+
+    
+{% endfor %}
+
+{% endblock %}
