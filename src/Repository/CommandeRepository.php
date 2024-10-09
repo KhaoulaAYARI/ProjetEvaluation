@@ -16,6 +16,18 @@ class CommandeRepository extends ServiceEntityRepository
         parent::__construct($registry, Commande::class);
     }
 
+
+    //////////////rechercher par filtres
+    public function commandesFiltre ($filtres){
+        $em = $this->getEntityManager();
+        $query = $em->createQuery(
+                'SELECT l.numero, l.dateCommande, l.statutCommande FROM App\Entity\Commande l WHERE l.numero LIKE :numero');
+                $query->setParameter('numero', '%' . $filtres['numero'] .'%');
+
+        $res = $query->getResult();
+        return $res;
+    }
+
     //    /**
     //     * @return Commande[] Returns an array of Commande objects
     //     */

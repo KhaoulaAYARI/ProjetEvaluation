@@ -3,7 +3,10 @@
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-Formulaire  insertion DetailCommande
+<h1>Formulaire  insertion DetailCommande</h1>
+{% block javascripts %}
+		{{ encore_entry_script_tags('vue1') }}
+{% endblock %}
 {{ form_start(formulaireDetailCommande) }}
 {{ form_row(formulaireDetailCommande.quantite) }}
 {{ form_row(formulaireDetailCommande.prixUnitaire) }}
