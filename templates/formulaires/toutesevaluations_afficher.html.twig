@@ -3,16 +3,21 @@
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-Vue qui affiche toutes les evaluations
+<h4>Toutes les evaluations</h4>
+{{ "\n"|nl2br }}
+{{ "\n"|nl2br }}
 <ul>
 {% for evaluation in toutesevaluations %}
-<li>{{evaluation.id}} - {{evaluation.commentaire}}
-
+<li> Note: {{evaluation.note}} User: {{evaluation.user.matricule}}
 <a href="{{ path ('updateEvaluation', {id:evaluation.id}) }}">Update</a>
-
 <a href="{{ path ('deleteEvaluation', {id:evaluation.id}) }}">Delete</a>
+
+{{ "\n"|nl2br }}- Commentaire {{evaluation.commentaire}}
+{{ "\n"|nl2br }}- Fournisseur {{evaluation.evaluationFournisseur.nom}}
+{{ "\n"|nl2br }}
 </li> 
  {% endfor %}
 </ul>
+
 
 {% endblock %}

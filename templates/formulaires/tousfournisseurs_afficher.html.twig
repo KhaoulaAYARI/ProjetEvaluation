@@ -3,12 +3,18 @@
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-Vue qui affiche tous les fournisseurs
+<h4>Toutes les fournisseurs</h4>
+{{ "\n"|nl2br }}
+{{ "\n"|nl2br }}
 <ul>
 {% for fournisseur in tousfournisseurs %}
-<li>{{fournisseur.nom }} - {{fournisseur.id}} 
+<li>Nom: {{fournisseur.nom }}
 <a href="{{ path ('updateFournisseur', {id:fournisseur.id}) }}">Update</a>
 <a href="{{ path ('deleteFournisseur', {id:fournisseur.id}) }}">Delete</a>
+<a href="{{ path ('afficherunFournisseur', {id:fournisseur.id}) }}">Consulter</a>
+{{ "\n"|nl2br }}-Email: {{fournisseur.email}} 
+{{ "\n"|nl2br }}-Adresse: {{fournisseur.adresse}} 
+
 </li>
  {% endfor %}
 </ul>

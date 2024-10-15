@@ -46,11 +46,16 @@
                 arrayFournisseurs.forEach ( function (fournisseur)  {
                         // manipuler le DOM. Ex: vider un div et le remplir avec les résultats
                         divResultats.innerHTML += "<p><b>Nom:</b> " + fournisseur.nom + "</p>";
+                      
+                        
 
                         divResultats.innerHTML +="<p><b>Email:</b> " + fournisseur.email + "</p>";
                         divResultats.innerHTML +="<p><b>Adresse:</b> " + fournisseur.adresse + "</p>" ;
+                        ////<a href=""  un lien pour tester ensuite l'ameliorer et mettre un bouton qui va m'envoyer a la page "fiche" de fournisseur choisit"//////
                         })
+                        
                         divResultats.innerHTML += "<hr>";
+                        
                     }
                 );
             })

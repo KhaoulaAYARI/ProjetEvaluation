@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h4>Le fournisseur choisi est :</h4>
+{{ "\n"|nl2br }}
+{{ "\n"|nl2br }}
+
+
+
+
+ nom: {{ fournisseur.nom|default("fournisseur n'existe pas") }}
+ 
+{% endblock %}

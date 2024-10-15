@@ -34,6 +34,31 @@ class FormulairesController extends AbstractController
         return $this->render('formulaires/index.html.twig');
     }
 
+
+    #[Route('/formulaires/touslesfournisseurs/afficher/{id}', name:'afficherunFournisseur')]
+    public function afficherUnFournisseur(int $id, ManagerRegistry $doctrine)
+    {
+        // Get the entity manager
+        $em = $doctrine->getManager();
+        // Get the repository for the Fournisseur entity
+        $rep = $em->getRepository(Fournisseur::class);
+        // Search for the fournisseur by id
+        $fournisseur = $rep->find($id);
+
+        // Check if the fournisseur was found
+        if (!$fournisseur) {
+            // Optionally, handle the case where the supplier was not found (e.g., throw a 404 error)
+            throw $this->createNotFoundException('Fournisseur not found');
+        }
+
+        // Prepare the variables for rendering
+        $vars = ['fournisseur' => $fournisseur];
+        // Render the template with the retrieved supplier information
+        return $this->render('formulaires/unfournisseurs_afficher.html.twig', $vars);
+    }
+    
+
+   
                 ///////////////////////////////
     ///////////FORMULAIRE INSERER FOURNISSEUR///////////
                 ///////////////////////////////

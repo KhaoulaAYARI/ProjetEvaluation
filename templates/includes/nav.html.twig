@@ -1,34 +1,66 @@
 
 
-<nav>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+
        {# option publique #}
-       <a href="{{path('fournisseur_filtre')}}"> Filtre fournisseurs </a>
+       
+
+       <a href="{{path('fournisseur_filtre')}}"> <h4>Filtre fournisseurs</h4> </a>
         {{ "\n"|nl2br }}
-       <a href="{{path('commande_filtre')}}"> Filtre commandes </a>
+       <a href="{{path('commande_filtre')}}"> <h4>Filtre commandes</h4> </a>
+
+      
+          
        
         {{ "\n"|nl2br }}  
         {{ "\n"|nl2br }} 
 
         {# option pour admin #}
         {% if  is_granted('ROLE_ADMIN')  %}
-            <a href="{{path('app_register')}}">Formulaire enregistrement</a>
-            <a href="{{path('insererFournisseurs')}}">Inserer Fournisseur</a>
-            <a href="{{path('insererProduits')}}">Inserer Produits</a>
-            <a href="{{path('insererCommande')}}">Inserer Commandes</a>
-            <a href="{{path('insererDetailCommande')}}">Inserer DetailCommandes</a>
-            <a href="{{path('insererEvaluation')}}">Inserer Evaluation</a>
+             <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <h5> ADMIN  </h5> </a>
+            <div class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{path('app_register')}}">Formulaire enregistrement</a></li>
+                <li><a class="dropdown-item" href="{{path('insererFournisseurs')}}">Inserer Fournisseur</a></li>
+                <li><a class="dropdown-item" href="{{path('insererProduits')}}">Inserer Produits</a></li>
+                <li><a class="dropdown-item" href="{{path('insererCommande')}}">Inserer Commandes</a></li>
+                <li><a class="dropdown-item" href="{{path('insererDetailCommande')}}">Inserer DetailCommandes</a></li>
+                <li><a class="dropdown-item" href="{{path('insererEvaluation')}}">Inserer Evaluation</a></li>
+                <li><hr class="dropdown-divider"></li>
+          </div>
+        </div>
+
+            {# <a href="{{path('app_register')}}">Formulaire enregistrement</a> #}
+            {# <a href="{{path('insererFournisseurs')}}">Inserer Fournisseur</a> #}
+            {# <a href="{{path('insererProduits')}}">Inserer Produits</a> #}
+            {# <a href="{{path('insererCommande')}}">Inserer Commandes</a> #}
+            {# <a href="{{path('insererDetailCommande')}}">Inserer DetailCommandes</a> #}
+            {# <a href="{{path('insererEvaluation')}}">Inserer Evaluation</a> #}
         {% endif %}
         {{ "\n"|nl2br }}
         {{ "\n"|nl2br }}
 
         {# option pour tous les users #}
         {% if  is_granted('ROLE_USER')  %}
-            
-            <a href="{{path('afficherTousFournisseurs')}}">updater Fournisseur</a>
-            <a href="{{path('afficherTousProduits')}}">updater Produits</a>
-            <a href="{{path('afficherToutesCommandes')}}">updater Commandes</a>
-            <a href="{{path('afficherTousdetailsCommandes')}}">updater DetailCommandes</a>
-            <a href="{{path('afficherToutesEvaluation')}}">updater Evaluation</a> 
+        <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <h5> USER  </h5> </a>
+            <div class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{path('afficherTousFournisseurs')}}"> Fournisseurs</a></li>
+                <li><a class="dropdown-item" href="{{path('afficherTousProduits')}}"> Produits</a></li>
+                <li><a class="dropdown-item" href="{{path('afficherToutesCommandes')}}"> Commandes</a></li>
+                <li><a class="dropdown-item" href="{{path('afficherTousdetailsCommandes')}}"> DetailCommandes</a></li>
+                <li><a class="dropdown-item" href="{{path('afficherToutesEvaluation')}}"> Evaluations</a></li>
+
+                <li><hr class="dropdown-divider"></li>
+          </div>
+        </div>
+            {# <a href="{{path('afficherTousFournisseurs')}}">updater Fournisseur</a> #}
+            {# <a href="{{path('afficherTousProduits')}}">updater Produits</a> #}
+            {# <a href="{{path('afficherToutesCommandes')}}">updater Commandes</a> #}
+            {# <a href="{{path('afficherTousdetailsCommandes')}}">updater DetailCommandes</a> #}
+            {# <a href="{{path('afficherToutesEvaluation')}}">updater Evaluation</a>  #}
         {% endif %}
         {{ "\n"|nl2br }}
         {{ "\n"|nl2br }}
@@ -38,10 +70,10 @@
             connecté: {{app.user.email}}
             {{ "\n"|nl2br }}
             
-            <a href="{{ path('app_logout')}}">Logout</a>
+            <a href="{{ path('app_logout')}}"><h4>Logout</h4></a>
             {{ "\n"|nl2br }}
         {% else %}
-            <a href="{{ path('app_login')}}">Login</a>
+            <a href="{{ path('app_login')}}"><h4>Login</h4></a>
        {% endif %}
        
             
@@ -49,3 +81,4 @@
             
        
        </nav>
+     

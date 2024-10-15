@@ -20,6 +20,8 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig');
     }
 
+    
+
     #[Route('/home/insert')]
     public function fournisseurInsert(ManagerRegistry $doctrine){
         $em=$doctrine->getManager();

@@ -42,6 +42,9 @@ class Fournisseur
     #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'evaluationFournisseur', cascade: ['persist', 'remove'])]
     private Collection $evaluations;
 
+
+    
+
     //Inserer le Hydrate
     public function hydrate(array $init)
     {        
