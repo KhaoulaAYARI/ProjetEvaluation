@@ -19,6 +19,12 @@ class FournisseurFixtures extends Fixture
                 'nom'=>$faker->company(),
                 'adresse'=>$faker->address(),
                 'email'=>$faker->email(),
+                'taille'=>$faker->randomElement(['Petite', 'Moyenne', 'Grande']),
+                'localisationGeographique'=>$faker->randomElement(['Nationale', 'internationale', 'local']),  
+                'prix'=>$faker->randomElement(['Fixe', 'Negociable', 'Variable']),  
+                'certifications'=>$faker->randomElement(['ISO 9001', 'ISO 45001', 'ISO 14001']), 
+                'technologiesUtilisees'=>$faker->randomElement(['Avancée', 'Intermediaire', 'Basique']),
+                 'modesDeLivraison'=>$faker->randomElement(['Camion', 'bateau','avion','train', 'autre']),                                                                                                                   
             ]
         );
         $manager->persist($fournisseur);

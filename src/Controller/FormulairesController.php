@@ -428,6 +428,33 @@ class FormulairesController extends AbstractController
     }
 
 
+ /////////////////////////////// 
+    /////////// AFFICHER UNE SEULE Evaluation///////////
+                ///////////////////////////////
+
+    #[Route('/formulaires/evaluation/afficher/{id}', name:'afficheruneevaluation')]
+    public function afficherUneEvaluation(int $id, ManagerRegistry $doctrine)
+    {
+        // Get the entity manager
+        $em = $doctrine->getManager();
+        // Get the repository for the Fournisseur entity
+        $rep = $em->getRepository(evaluation::class);
+        // Search for the fournisseur by id
+        $evaluation = $rep->find($id);
+
+        // Check if the fournisseur was found
+        if (!$evaluation) {
+            // Optionally, handle the case where the supplier was not found (e.g., throw a 404 error)
+            throw $this->createNotFoundException('Evaluation not found');
+        }
+
+        // Prepare the variables for rendering
+        $vars = ['evaluation' => $evaluation];
+        // Render the template with the retrieved supplier information
+        return $this->render('formulaires/uneevaluation_afficher.html.twig', $vars);
+    }
+    
+
                 ///////////////////////////////
     ///////////FORMULAIRE UPDATE EVALUATION///////////
                 ///////////////////////////////

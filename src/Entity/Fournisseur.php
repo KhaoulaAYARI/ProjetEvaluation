@@ -42,6 +42,24 @@ class Fournisseur
     #[ORM\OneToMany(targetEntity: Evaluation::class, mappedBy: 'evaluationFournisseur', cascade: ['persist', 'remove'])]
     private Collection $evaluations;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $taille = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $localisationGeographique = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $prix = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $certifications = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $technologiesUtilisees = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $modesDeLivraison = null;
+
 
     
 
@@ -196,6 +214,78 @@ class Fournisseur
                 $evaluation->setEvaluationFournisseur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTaille(): ?string
+    {
+        return $this->taille;
+    }
+
+    public function setTaille(?string $taille): static
+    {
+        $this->taille = $taille;
+
+        return $this;
+    }
+
+    public function getLocalisationGeographique(): ?string
+    {
+        return $this->localisationGeographique;
+    }
+
+    public function setLocalisationGeographique(?string $localisationGeographique): static
+    {
+        $this->localisationGeographique = $localisationGeographique;
+
+        return $this;
+    }
+
+    public function getPrix(): ?string
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(?string $prix): static
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getCertifications(): ?string
+    {
+        return $this->certifications;
+    }
+
+    public function setCertifications(?string $certifications): static
+    {
+        $this->certifications = $certifications;
+
+        return $this;
+    }
+
+    public function getTechnologiesUtilisees(): ?string
+    {
+        return $this->technologiesUtilisees;
+    }
+
+    public function setTechnologiesUtilisees(?string $technologiesUtilisees): static
+    {
+        $this->technologiesUtilisees = $technologiesUtilisees;
+
+        return $this;
+    }
+
+    public function getModesDeLivraison(): ?string
+    {
+        return $this->modesDeLivraison;
+    }
+
+    public function setModesDeLivraison(?string $modesDeLivraison): static
+    {
+        $this->modesDeLivraison = $modesDeLivraison;
 
         return $this;
     }

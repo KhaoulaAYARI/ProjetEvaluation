@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h4>L'evaluation choisie est :</h4>
+{{ "\n"|nl2br }}
+{{ "\n"|nl2br }}
+{{ "\n"|nl2br }} note {{evaluation.note}} 
+
+ {{ "\n"|nl2br }} commentaire {{evaluation.commentaire}} 
+ {# {{ "\n"|nl2br }} date {{evaluation.date}}  #}
+ {{ "\n"|nl2br }} systeme Management Qualite {{evaluation.systemeManagementQualite}} 
+ {{ "\n"|nl2br }} respect Criteres Qualite {{evaluation.respectCriteresQualite}} 
+ {{ "\n"|nl2br }} respect Specifications Produit {{evaluation.respectSpecificationsProduit}} 
+ {{ "\n"|nl2br }} aspect Generale Processus Fabrication {{evaluation.aspectGeneraleProcessusFabrication}} 
+ 
+{% endblock %}

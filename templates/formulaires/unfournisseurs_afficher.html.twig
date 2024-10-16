@@ -11,5 +11,15 @@
 
 
  nom: {{ fournisseur.nom|default("fournisseur n'existe pas") }}
+ {{ "\n"|nl2br }} Email: {{fournisseur.email}} 
+{{ "\n"|nl2br }} Adresse: {{fournisseur.adresse}} 
+ {{ "\n"|nl2br }} Taille: {{fournisseur.taille}} 
+ {{ "\n"|nl2br }} Localisation Geographique: {{fournisseur.localisationGeographique}} 
+  {{ "\n"|nl2br }} Prix: {{fournisseur.prix}} 
+ {{ "\n"|nl2br }} Certifications: {{fournisseur.certifications}} 
+ {{ "\n"|nl2br }} Technologies Utilisees: {{fournisseur.technologiesUtilisees}} 
+  {{ "\n"|nl2br }} Modes De Livraison: {{fournisseur.modesDeLivraison}} 
+ {{ "\n"|nl2br }} 
+ {{ "\n"|nl2br }}
  
 {% endblock %}

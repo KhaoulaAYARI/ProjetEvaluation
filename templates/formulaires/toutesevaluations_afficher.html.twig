@@ -11,6 +11,8 @@
 <li> Note: {{evaluation.note}} User: {{evaluation.user.matricule}}
 <a href="{{ path ('updateEvaluation', {id:evaluation.id}) }}">Update</a>
 <a href="{{ path ('deleteEvaluation', {id:evaluation.id}) }}">Delete</a>
+<a href="{{ path ('afficheruneevaluation', {id:evaluation.id}) }}">Consulter</a>
+
 
 {{ "\n"|nl2br }}- Commentaire {{evaluation.commentaire}}
 {{ "\n"|nl2br }}- Fournisseur {{evaluation.evaluationFournisseur.nom}}

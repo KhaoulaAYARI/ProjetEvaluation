@@ -29,7 +29,12 @@ class EvaluationFixtures extends Fixture implements DependentFixtureInterface
             [
                 'note'=>$faker->randomElement([1,2,3,4,5]),
                 'commentaire'=>$faker->sentence(5),
-                
+                'date'=>$faker->dateTimeBetween('-1 year', 'now'),
+                'systemeManagementQualite'=>$faker->randomElement(['Non-conforme','Implementé','Conforme','Excellent']),
+                'respectCriteresQualite'=>$faker->randomElement(['Respecté','Non-respecté']),
+                'respectSpecificationsProduit'=>$faker->randomElement(['Respecté','Non-respecté']),
+                'aspectGeneraleProcessusFabrication'=>$faker->randomElement(['Non-conforme','Conforme','Excellent']),
+
             ]
         );
 

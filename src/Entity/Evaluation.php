@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\EvaluationRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EvaluationRepository::class)]
@@ -24,6 +25,21 @@ class Evaluation
 
     #[ORM\ManyToOne(inversedBy: 'evaluations')]
     private ?Fournisseur $evaluationFournisseur = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $systemeManagementQualite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $respectCriteresQualite = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $respectSpecificationsProduit = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $aspectGeneraleProcessusFabrication = null;
 
 
      /////Inserer le Hydrate
@@ -95,6 +111,66 @@ class Evaluation
     public function setEvaluationFournisseur(?Fournisseur $evaluationFournisseur): static
     {
         $this->evaluationFournisseur = $evaluationFournisseur;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(?\DateTimeInterface $date): static
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getSystemeManagementQualite(): ?string
+    {
+        return $this->systemeManagementQualite;
+    }
+
+    public function setSystemeManagementQualite(?string $systemeManagementQualite): static
+    {
+        $this->systemeManagementQualite = $systemeManagementQualite;
+
+        return $this;
+    }
+
+    public function getRespectCriteresQualite(): ?string
+    {
+        return $this->respectCriteresQualite;
+    }
+
+    public function setRespectCriteresQualite(?string $respectCriteresQualite): static
+    {
+        $this->respectCriteresQualite = $respectCriteresQualite;
+
+        return $this;
+    }
+
+    public function getRespectSpecificationsProduit(): ?string
+    {
+        return $this->respectSpecificationsProduit;
+    }
+
+    public function setRespectSpecificationsProduit(?string $respectSpecificationsProduit): static
+    {
+        $this->respectSpecificationsProduit = $respectSpecificationsProduit;
+
+        return $this;
+    }
+
+    public function getAspectGeneraleProcessusFabrication(): ?string
+    {
+        return $this->aspectGeneraleProcessusFabrication;
+    }
+
+    public function setAspectGeneraleProcessusFabrication(?string $aspectGeneraleProcessusFabrication): static
+    {
+        $this->aspectGeneraleProcessusFabrication = $aspectGeneraleProcessusFabrication;
 
         return $this;
     }
