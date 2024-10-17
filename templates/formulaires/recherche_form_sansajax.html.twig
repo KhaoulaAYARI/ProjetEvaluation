@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+Formulaire Recherche fournisseur par nom sans ajax
+{{ form_start(form) }}
+{{ form_row(form.nom) }}
+<button type="submit" class="btn btn-outline-primary">Rechercher</button>
+{# <input type="submit" value="Inserer"> #}
+{{ form_end(form) }}
+
+{% endblock %}

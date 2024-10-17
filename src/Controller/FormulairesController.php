@@ -4,22 +4,23 @@ namespace App\Controller;
 
 use App\Entity\Produit;
 use App\Entity\Commande;
+use App\Form\FiltreType;
 use App\Form\ProduitType;
 use App\Entity\Evaluation;
 use App\Form\CommandeType;
 use App\Entity\Fournisseur;
+use PHPUnit\TextUI\Command;
 use App\Form\EvaluationType;
 use App\Form\FournisseurType;
 use App\Entity\DetailCommande;
 use App\Form\DetailCommandeType;
 use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
-use App\Repository\DetailCommandeRepository;
 use App\Repository\EvaluationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FournisseurRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use PHPUnit\TextUI\Command;
+use App\Repository\DetailCommandeRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -56,8 +57,50 @@ class FormulairesController extends AbstractController
         // Render the template with the retrieved supplier information
         return $this->render('formulaires/unfournisseurs_afficher.html.twig', $vars);
     }
-    
+             ///////////////////////////////
+    ///////////RECHERCHER ET AFFICHER UN FOURNISSEUR SANS AJAX///////////
+                ///////////////////////////////
+#[Route('/formulaires/touslesfournisseurs/rechercher/form', name:'rechercherparnom')]
+public function rechercheForm(Request $req)
+{    
+     $form = $this->createForm(FiltreType::class);
+     $form ->handleRequest($req);
+     
+     if ($form->isSubmitted() && $form->isValid()) {
+        
+         return $this->redirectToRoute('rechercheParNomResultat', 
+         ['filtre' => json_encode ($form->getData())]);
+     }
+     $vars = ['form' => $form];
+     return $this->render('formulaires/recherche_form_sansajax.html.twig', $vars);
+     
+     
+ }
 
+  ////////// rechercher un fournisseur et l'afficher //////////
+   
+  #[Route('/formulaires/touslesfournisseurs/rechercher/resultats', name : 'rechercheParNomResultat')]
+  public function rechercheResultat(Request $req, FournisseurRepository $rep){
+      //dd($req->get('filtre'));
+      // Décoder le JSON reçu dans la requête
+
+      $filtreArray = json_decode($req->get('filtre'), true);
+       // Pour utiliser findBy, on doit construire un tableau des critères à partir de $filtreArray
+    // la structure de $filtreArray correspond aux propriétés de l'entité Fournisseur
+    // Par exemple, si filtroArray contient des clés 'nom', 'ville', etc.
+    
+    // Exemple de recherche par nom
+      $critere = [];
+      if (isset($filtreArray['nom'])) {
+          $critere['nom'] = $filtreArray['nom'];
+      }
+      //dd($critere);
+      $fournisseur = $rep->findBy($critere);
+ //dd($fournisseur);
+      $vars = ['fournisseur'=>$fournisseur];
+      return $this->render('formulaires/resultat_recherche_sansajax.html.twig',$vars);
+     
+  }
    
                 ///////////////////////////////
     ///////////FORMULAIRE INSERER FOURNISSEUR///////////
@@ -147,6 +190,9 @@ class FormulairesController extends AbstractController
         return $this->redirectToRoute('afficherTousFournisseurs');
     }
         
+
+
+
 
             /////////////////////////////// 
     ///////////FORMULAIRE INSERER PRODUIT///////////
