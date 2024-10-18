@@ -61,25 +61,23 @@ class Fournisseur
     private ?string $modesDeLivraison = null;
 
 
-    
+
 
     //Inserer le Hydrate
     public function hydrate(array $init)
-    {        
-        foreach ($init as $propriete => $valeur) 
-        {   $nomSet = "set" . ucfirst($propriete);
-            if (!method_exists($this, $nomSet)) 
-            {                
+    {
+        foreach ($init as $propriete => $valeur) {
+            $nomSet = "set" . ucfirst($propriete);
+            if (!method_exists($this, $nomSet)) {
                 // à nous de voir selon le niveau de restriction...                
                 // throw new Exception("La méthode {$nomSet} n'existe pas");
-            }          
-            else {               
+            } else {
                 // appel au set                
-                $this->$nomSet($valeur);            
-            }        
-        }    
-    }    
-    public function __construct(array $init=[])
+                $this->$nomSet($valeur);
+            }
+        }
+    }
+    public function __construct(array $init = [])
     {
         $this->commandes = new ArrayCollection();
         $this->produitsF = new ArrayCollection();
@@ -194,6 +192,25 @@ class Fournisseur
     public function getEvaluations(): Collection
     {
         return $this->evaluations;
+    }
+    ///////////code pour calculer la moyenne///////////ajouté le 18-10-24 ChatGPT
+    public function calculerMoyenneEvaluations(): float
+    {
+        $evaluations = $this->getEvaluations();
+
+        if ($evaluations->isEmpty()) {
+            return 0;
+        }
+
+        $somme = 0;
+        $nombreEvaluations = 0;
+
+        foreach ($evaluations as $evaluation) {
+            $somme += $evaluation->getNote(); // Supposons que getNote() donne la note
+            $nombreEvaluations++;
+        }
+        // dd($somme / $nombreEvaluations);
+        return $somme / $nombreEvaluations;
     }
 
     public function addEvaluation(Evaluation $evaluation): static

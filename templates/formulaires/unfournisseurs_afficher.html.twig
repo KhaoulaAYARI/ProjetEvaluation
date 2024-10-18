@@ -5,12 +5,25 @@
 {% block body %}
 <h4>Le fournisseur choisi est :</h4>
 {{ "\n"|nl2br }}
+
+
+
+
+
+ <b>Nom:</b> {{ fournisseur.nom|default("fournisseur n'existe pas") }}
 {{ "\n"|nl2br }}
 
+ <b>Moyenne des Evaluations:</b> 
+ 
+ {{moyenne}}
 
-
-
- <b>nom:</b> {{ fournisseur.nom|default("fournisseur n'existe pas") }}
+{% if moyenne <3 %}
+   {{ "\n"|nl2br }} <b>Classe C</b>
+{% elseif moyenne ==3 %}
+    {{ "\n"|nl2br }} <b>Classe B</b>
+{% else %}
+  {{ "\n"|nl2br }} <b>Classe A</b>
+{% endif %}
  {{ "\n"|nl2br }} <b>Email:</b> {{fournisseur.email}} 
 {{ "\n"|nl2br }} <b>Adresse:</b> {{fournisseur.adresse}} 
  {{ "\n"|nl2br }} <b>Taille:</b> {{fournisseur.taille}} 
@@ -30,8 +43,9 @@
  {{ "\n"|nl2br }}
  <b>Liste de Evaluations:</b> {{ "\n"|nl2br }}
  {% for item in fournisseur.evaluations %}
-    note:{{ item.note }}<br>
+    <b>date:</b> {{ item.date|date('d-m-Y') }} <b>note:</b>{{ item.note }} 
+    <br>
 {% endfor %}
  {{ "\n"|nl2br }}
- 
+
 {% endblock %}

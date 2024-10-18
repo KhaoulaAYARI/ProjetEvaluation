@@ -24,7 +24,7 @@ class EvaluationFixtures extends Fixture implements DependentFixtureInterface
 
         $faker=Factory::create("fr_BE");
 
-        for($i=0; $i<50; $i++){
+        for($i=0; $i<150; $i++){
         $evaluation = new Evaluation(
             [
                 'note'=>$faker->randomElement([1,2,3,4,5]),
