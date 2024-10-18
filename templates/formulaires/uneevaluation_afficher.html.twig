@@ -6,13 +6,15 @@
 <h4>L'evaluation choisie est :</h4>
 {{ "\n"|nl2br }}
 {{ "\n"|nl2br }}
-{{ "\n"|nl2br }} note {{evaluation.note}} 
-
- {{ "\n"|nl2br }} commentaire {{evaluation.commentaire}} 
- {# {{ "\n"|nl2br }} date {{evaluation.date}}  #}
- {{ "\n"|nl2br }} systeme Management Qualite {{evaluation.systemeManagementQualite}} 
- {{ "\n"|nl2br }} respect Criteres Qualite {{evaluation.respectCriteresQualite}} 
- {{ "\n"|nl2br }} respect Specifications Produit {{evaluation.respectSpecificationsProduit}} 
- {{ "\n"|nl2br }} aspect Generale Processus Fabrication {{evaluation.aspectGeneraleProcessusFabrication}} 
+{{ "\n"|nl2br }} <b>note</b> {{evaluation.note}} 
+{{ "\n"|nl2br }} <b>user</b> {{evaluation.user.nom}} 
+{{ "\n"|nl2br }} <b>fournisseur</b> {{evaluation.evaluationFournisseur.nom}} 
+ {{ "\n"|nl2br }} <b>commentaire</b> {{evaluation.commentaire}} 
+ {{ "\n"|nl2br }} <b>date: </b> {{ evaluation.date|date('d-m-Y') }}
+ {{ "\n"|nl2br }} <b>systeme Management Qualite</b> {{evaluation.systemeManagementQualite}} 
+ {{ "\n"|nl2br }} <b>respect Criteres Qualite</b> {{evaluation.respectCriteresQualite}} 
+ {{ "\n"|nl2br }} <b>respect Specifications Produit</b> {{evaluation.respectSpecificationsProduit}} 
+ {{ "\n"|nl2br }} <b>aspect Generale Processus Fabrication</b> {{evaluation.aspectGeneraleProcessusFabrication}} 
+ {{ "\n"|nl2br }}Si vous voulez avoir plus de detail, veuillez consulter le rapport d'audit!!
  
 {% endblock %}

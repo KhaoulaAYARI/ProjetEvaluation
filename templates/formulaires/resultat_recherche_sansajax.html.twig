@@ -3,20 +3,20 @@
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-Resultat Recherche fournisseur par nom sans ajax
+<h4>Resultat Recherche fournisseur par nom sans ajax</h4>
 
 {{ "\n"|nl2br }}
 {{ "\n"|nl2br }}
 {% for item in fournisseur %}
-    nom: {{ item.nom }}
- {{ "\n"|nl2br }} Email: {{item.email}} 
-{{ "\n"|nl2br }} Adresse: {{item.adresse}} 
- {{ "\n"|nl2br }} Taille: {{item.taille}} 
- {{ "\n"|nl2br }} Localisation Geographique: {{item.localisationGeographique}} 
-  {{ "\n"|nl2br }} Prix: {{item.prix}} 
- {{ "\n"|nl2br }} Certifications: {{item.certifications}} 
- {{ "\n"|nl2br }} Technologies Utilisees: {{item.technologiesUtilisees}} 
-  {{ "\n"|nl2br }} Modes De Livraison: {{item.modesDeLivraison}} 
+    <b>nom:</b> {{ item.nom }}
+ {{ "\n"|nl2br }} <b>Email:</b> {{item.email}} 
+{{ "\n"|nl2br }} <b>Adresse:</b> {{item.adresse}} 
+ {{ "\n"|nl2br }} <b>Taille:</b> {{item.taille}} 
+ {{ "\n"|nl2br }} <b>Localisation Geographique:</b> {{item.localisationGeographique}} 
+  {{ "\n"|nl2br }}<b> Prix:</b> {{item.prix}} 
+ {{ "\n"|nl2br }} <b>Certifications:</b> {{item.certifications}} 
+ {{ "\n"|nl2br }} <b>Technologies Utilisees:</b> {{item.technologiesUtilisees}} 
+  {{ "\n"|nl2br }} <b>Modes De Livraison:</b> {{item.modesDeLivraison}} 
 
 {% else %}
     <p>Le fournisseur n'existe pas.</p>

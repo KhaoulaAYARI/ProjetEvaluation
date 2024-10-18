@@ -8,7 +8,7 @@
 {{ "\n"|nl2br }}
 <ul>
 {% for commande in toutescommandes %}
-<li>Numero de commande : {{commande.numero }} 
+<li>Numero de commande :</b> {{commande.numero }} 
 <a href="{{ path ('updateCommande', {id:commande.id}) }}">Update</a>
 <a href="{{ path ('deleteCommande', {id:commande.id}) }}">Delete</a>
 {{ "\n"|nl2br }} - Statut: {{commande.statutCommande}} 
