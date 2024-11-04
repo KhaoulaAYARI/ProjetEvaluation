@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update User{% endblock %}
+
+{% block body %}
+<h4>Formulaire Update User</h4>
+
+{{ form_start(form) }}
+
+    {{ form_row(form.matricule) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.roles) }}
+    {{ form_row(form.email) }}
+
+    <input type="submit" value="Update !" class="btn btn-primary">
+
+{{ form_end(form) }}
+
+{% endblock %}

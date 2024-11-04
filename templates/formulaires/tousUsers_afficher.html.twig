@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormulairesController!{% endblock %}
+
+{% block body %}
+<h4>Tous les users</h4>
+
+<ul>
+{% for user in tousUsers %}
+<li><b>Matricule : </b> {{user.matricule }}{{ "\n"|nl2br }}
+<b>Nom : </b> {{user.nom }}{{ "\n"|nl2br }}
+<b>Email : </b> {{user.email }}{{ "\n"|nl2br }}
+<a href="{{ path ('updateUser', {id:user.id}) }}">Update</a>
+<a href="">Consulter</a>
+<a href="{{ path ('deleteUser', {id:user.id}) }}">Delete</a>
+
+
+</li>
+ {% endfor %}
+</ul>
+
+{% endblock %}

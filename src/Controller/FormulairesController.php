@@ -13,7 +13,9 @@ use PHPUnit\TextUI\Command;
 use App\Form\EvaluationType;
 use App\Form\FournisseurType;
 use App\Entity\DetailCommande;
+use App\Entity\User;
 use App\Form\DetailCommandeType;
+use App\Form\UserType;
 use App\Repository\ProduitRepository;
 use App\Repository\CommandeRepository;
 use App\Repository\EvaluationRepository;
@@ -21,6 +23,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\FournisseurRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Repository\DetailCommandeRepository;
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -511,6 +514,7 @@ class FormulairesController extends AbstractController
             //on a cliqué submit
             $em->flush();
             //dd($fournisseur);
+            return $this->redirectToRoute('afficherTousdetailsCommandes');
         }
         $vars = ['form' => $form];
         return $this->render('formulaires/touslesdetailscommandes_update.html.twig', $vars);
@@ -561,6 +565,7 @@ class FormulairesController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($evaluation);
             $em->flush();
+            return $this->redirectToRoute('afficherToutesEvaluation');
         }
         $vars = ['formulaireEvaluation' => $form];
         return $this->render('formulaires/evaluation_inserer.html.twig', $vars);
@@ -627,6 +632,7 @@ class FormulairesController extends AbstractController
             //on a cliqué submit
             $em->flush();
             //dd($fournisseur);
+            return $this->redirectToRoute('afficherToutesEvaluation');
         }
         $vars = ['form' => $form];
         return $this->render('formulaires/toutesevaluations_update.html.twig', $vars);
@@ -655,6 +661,73 @@ class FormulairesController extends AbstractController
         $em->flush();
         //redirection vers l'affichage
         return $this->redirectToRoute('afficherToutesEvaluation');
+    }
+
+
+     /////////////////////////////// 
+    /////////// AFFICHER TOUS LES USERS///////////
+    ///////////////////////////////
+
+    
+
+    ///////////////////////////////
+    ///////////FORMULAIRE DELETE USER///////////
+    ///////////////////////////////
+
+
+    //delete USER (affichage et traitement de formulaire)
+    #[Route('/formulaires/tousUsers/delete/{id}', name: 'deleteUser')]
+    public function deleteuser(Request $req, UserRepository $rep, EntityManagerInterface $em)
+    {
+        //obtenier l'id de user a effacer
+        $id = $req->get('id');
+        //obtenier la user de la BD
+        $user = $rep->find($id);
+        //lancer remove
+        $em->remove($user);
+        //lancer flush
+        $em->flush();
+        //redirection vers l'affichage
+        return $this->redirectToRoute('afficherTousUsers');
+    }
+
+    ///////////////////////////////
+    ///////////FORMULAIRE UPDATE USER///////////
+    ///////////////////////////////
+
+
+    //action qui affiche tous les USERS
+    #[Route('/formulaires/tousUsers/afficher', name: 'afficherTousUsers')]
+    public function afficherTousUsers(ManagerRegistry $doctrine)
+    {
+        //obtenier toutes les users de la BD
+        $em = $doctrine->getManager();
+        $rep = $em->getRepository(User::class);
+        $tousUsers = $rep->findAll();
+        //dd($tousUsers);
+        $vars = ['tousUsers' => $tousUsers];
+        //Envoyer l'array des users à la vue
+        return $this->render('formulaires/tousUsers_afficher.html.twig', $vars);
+    }
+
+    //update des users (affichage et traitement de formulaire)
+    #[Route('/formulaires/tousUsers/update/{id}', name: 'updateUser')]
+    public function updateUser(Request $req, UserRepository $rep, EntityManagerInterface $em)
+    {
+        $id = $req->get('id');
+        //chercher le user
+        $user = $rep->find($id);
+        //creer le form    
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($req);
+        if ($form->isSubmitted()) {
+            //on a cliqué submit
+            $em->flush();
+            //dd($fournisseur);
+            return $this->redirectToRoute('afficherTousUsers');
+        }
+        $vars = ['form' => $form];
+        return $this->render('formulaires/tousUsers_update.html.twig', $vars);
     }
 
 

@@ -26,6 +26,7 @@
             <h4> Admin  </h4> </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="{{path('app_register')}}">Formulaire enregistrement</a></li>
+                <li><a class="dropdown-item" href="{{path('afficherTousUsers')}}">Liste Users</a></li>
                 <li><a class="dropdown-item" href="{{path('insererFournisseurs')}}">Inserer Fournisseur</a></li>
                 <li><a class="dropdown-item" href="{{path('insererProduits')}}">Inserer Produits</a></li>
                 <li><a class="dropdown-item" href="{{path('insererCommande')}}">Inserer Commandes</a></li>
@@ -46,6 +47,7 @@
                 <li><a class="dropdown-item" href="{{path('afficherToutesCommandes')}}"> Commandes</a></li>
                 <li><a class="dropdown-item" href="{{path('afficherTousdetailsCommandes')}}"> DetailCommandes</a></li>
                 <li><a class="dropdown-item" href="{{path('afficherToutesEvaluation')}}"> Evaluations</a></li>
+                
                 <li><hr class="dropdown-divider"></li>
           </ul>
         {% endif %}
