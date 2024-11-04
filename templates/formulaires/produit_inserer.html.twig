@@ -3,8 +3,8 @@
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-Formulaire Produit
-{{ form_start(formulaireProduit) }}
+<h4>Formulaire insertion Produit</h4>
+{{ form_start(formulaireProduit, {'attr': {'id': 'produitInsertionForm'}}) }}
 {{ form_row(formulaireProduit.matricule) }}
 {{ form_row(formulaireProduit.description) }}
 {{ form_row(formulaireProduit.prix) }}
@@ -12,4 +12,21 @@ Formulaire Produit
 <input type="submit" value="Inserer">
 {{ form_end(formulaireProduit) }}
 
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('produitInsertionForm');
+        //id attribute on the form: Setting an id (produitInsertionForm) ensures that your JavaScript accurately selects the correct form.
+        if (form) {
+			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
+            form.addEventListener('submit', function(event) {
+                alert('Insertion réussie');
+				// Redirect to the new path after the alert
+                window.location.href = '{{ path("afficherTousProduits") }}';
+            });
+        }
+    });
+</script>
 {% endblock %}

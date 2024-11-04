@@ -4,12 +4,32 @@
 
 {% block body %}
 
-Formulaire Fournisseur
-{{ form_start(formulaireFournisseur) }}
+<h1>Formulaire insertion Fournisseur</h1>
+
+{{ form_start(formulaireFournisseur, {'attr': {'id': 'insererFournisseur'}}) }}
+{# Add an id to your form in the Twig template to make sure you are targeting the right element. #}
+
 {{ form_row(formulaireFournisseur.nom) }}
 {{ form_row(formulaireFournisseur.adresse) }}
 {{ form_row(formulaireFournisseur.email) }}
 <input type="submit" value="Inserer">
 {{ form_end(formulaireFournisseur) }}
 
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('insererFournisseur');
+        //id attribute on the form: Setting an id (insererFournisseur) ensures that your JavaScript accurately selects the correct form.
+        if (form) {
+			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
+            form.addEventListener('submit', function(event) {
+                alert('Insertion réussie');
+				// Redirect to the new path after the alert
+                window.location.href = '{{ path("afficherTousFournisseurs") }}';
+            });
+        }
+    });
+</script>
 {% endblock %}

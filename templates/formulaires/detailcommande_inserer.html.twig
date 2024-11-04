@@ -24,7 +24,6 @@
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
                 alert('Insertion réussie');
 				// Redirect to the new path after the alert
                 window.location.href = '{{ path("afficherTousdetailsCommandes") }}';

@@ -18,6 +18,13 @@ class FournisseurType extends AbstractType
             ->add('nom', TextType::class)
             ->add('adresse', TextareaType::class)
             ->add('email', EmailType::class)
+            ->add('taille', TextType::class)
+            ->add('localisationGeographique', TextType::class)
+            ->add('prix', TextType::class)
+            ->add('certifications', TextType::class)
+            ->add('technologiesUtilisees', TextType::class)
+            ->add('modesDeLivraison', TextType::class)
+
         ;
     }
 

@@ -133,7 +133,8 @@ class FormulairesController extends AbstractController
             $em->persist($fournisseur);
             $em->flush();
             //possibilité de renvoyer vers une autre vue
-            //return $this->render('formulaires/une_autre_vue.html.twig');
+            return $this->redirectToRoute('afficherTousFournisseurs');
+            
         }
 
         $vars = ['formulaireFournisseur' => $form];
@@ -173,6 +174,7 @@ class FormulairesController extends AbstractController
             //on a cliqué submit
             $em->flush();
             //dd($fournisseur);
+            return $this->redirectToRoute('afficherTousFournisseurs');
         }
         $vars = ['form' => $form];
         return $this->render('formulaires/tousfournisseurs_update.html.twig', $vars);
@@ -196,6 +198,7 @@ class FormulairesController extends AbstractController
         $em->remove($fournisseur);
         //lancer flush
         $em->flush();
+         
         //redirection vers l'affichage
         return $this->redirectToRoute('afficherTousFournisseurs');
     }
@@ -223,6 +226,7 @@ class FormulairesController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($produit);
             $em->flush();
+            return $this->redirectToRoute('afficherTousProduits');
         }
         $vars = ['formulaireProduit' => $form];
         return $this->render('formulaires/produit_inserer.html.twig', $vars);
@@ -295,6 +299,7 @@ class FormulairesController extends AbstractController
             //on a cliqué submit
             $em->flush();
             //dd($fournisseur);
+            return $this->redirectToRoute('afficherTousProduits');
         }
         $vars = ['form' => $form];
         return $this->render('formulaires/tousproduits_update.html.twig', $vars);
@@ -341,6 +346,7 @@ class FormulairesController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($commande);
             $em->flush();
+            return $this->redirectToRoute('afficherToutesCommandes');
         }
         $vars = ['formulaireCommande' => $form];
         return $this->render('formulaires/commande_inserer.html.twig', $vars);
@@ -411,6 +417,8 @@ class FormulairesController extends AbstractController
             //on a cliqué submit
             $em->flush();
             //dd($fournisseur);
+            return $this->redirectToRoute('afficherToutesCommandes');
+            
         }
         $vars = ['form' => $form];
         return $this->render('formulaires/toutescommandes_update.html.twig', $vars);
