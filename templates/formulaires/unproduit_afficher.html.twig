@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+<h4>Le produit choisi est :</h4>
+{{ "\n"|nl2br }}
+ {{ "\n"|nl2br }} <b>Matricule:</b> {{produit.matricule}}
+{{ "\n"|nl2br }}
+{{ "\n"|nl2br }} <b>- Id:</b> {{produit.id }}
+{{ "\n"|nl2br }} <b>- Prix:</b> {{produit.prix }}
+{{ "\n"|nl2br }} <b>- description:</b> {{produit.description }}
+ {{ "\n"|nl2br }}<b>- Fournisseur:</b> {{produit.produitFournisseur.nom}} 
+ 
+
+
+{% endblock %}

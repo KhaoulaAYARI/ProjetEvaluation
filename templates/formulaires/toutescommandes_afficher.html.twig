@@ -8,11 +8,12 @@
 {{ "\n"|nl2br }}
 <ul>
 {% for commande in toutescommandes %}
-<li>Numero de commande :</b> {{commande.numero }} 
+<li><b>Numero de commande :</b> {{commande.numero }} 
+<a href="{{ path ('afficheruneCommande', {id:commande.id}) }}">Consulter</a>
+
 <a href="{{ path ('updateCommande', {id:commande.id}) }}">Update</a>
 <a href="{{ path ('deleteCommande', {id:commande.id}) }}">Delete</a>
-{{ "\n"|nl2br }} - Statut: {{commande.statutCommande}} 
-{{ "\n"|nl2br }} - Fournisseur: {{commande.commandeFournisseur.nom }} 
+{{ "\n"|nl2br }} <b>- Statut:</b> {{commande.statutCommande}} 
 
 
 

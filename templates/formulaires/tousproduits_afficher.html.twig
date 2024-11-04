@@ -3,16 +3,16 @@
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h4>Toutes les produits</h4>
+<h4>Tous les produits</h4>
 {{ "\n"|nl2br }}
 {{ "\n"|nl2br }}
 <ul>
 {% for produit in touslesproduits %}
-<li>Matricule :  {{produit.matricule }}
+<li><b>Matricule : </b> {{produit.matricule }}
+<a href="{{ path ('afficherunProduit', {id:produit.id}) }}">Consulter</a>
 <a href="{{ path ('updateProduit', {id:produit.id}) }}">Update</a>
 <a href="{{ path ('deleteProduit', {id:produit.id}) }}">Delete</a>
-{{ "\n"|nl2br }} - Prix: {{produit.prix }}
- {{ "\n"|nl2br }}- Fournisseur: {{produit.produitFournisseur.nom}} 
+ {{ "\n"|nl2br }}<b>- Fournisseur:</b> {{produit.produitFournisseur.nom}} 
 
 </li>
  {% endfor %}

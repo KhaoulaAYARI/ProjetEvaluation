@@ -7,12 +7,13 @@
 <ul>
 {% for detailcommande in touslesdetailscommandes %}
 <li> <b>Id</b> {{detailcommande.id}} 
-{# - {{detailcommande.quantite}} -{{detailcommande.prixUnitaire}}  #}
-
-
 <a href="{{ path ('updateDetailsCommande', {id:detailcommande.id}) }}">Update</a>
 
 <a href="{{ path ('deleteDetailsCommande', {id:detailcommande.id}) }}">Delete</a>
+{{ "\n"|nl2br }}
+La commande <b>Numero</b>{{detailcommande.commandesD.numero}} consomme une <b>quantite</b> egale a  {{detailcommande.quantite}} de produit ayant la <b>matricule </b> {{detailcommande.produits.matricule}} 
+
+
 </li>
  {% endfor %}
 </ul>

@@ -41,7 +41,7 @@
     {{ item.numero }}<br>
 {% endfor %}
  {{ "\n"|nl2br }}
- <b>Liste de Evaluations:</b> {{ "\n"|nl2br }}
+ <b>Liste des Evaluations:</b> {{ "\n"|nl2br }}
  {% for item in fournisseur.evaluations %}
     <b>date:</b> {{ item.date|date('d-m-Y') }} <b>note:</b>{{ item.note }} 
     <br>

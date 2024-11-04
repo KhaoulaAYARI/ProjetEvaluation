@@ -230,6 +230,38 @@ class FormulairesController extends AbstractController
 
 
 
+
+     ///////////////////////////////
+    ///////////FORMULAIRE CONSULTER UN PRODUIT ///////////
+    ///////////////////////////////
+    #[Route('/formulaires/produit/afficher/{id}', name: 'afficherunProduit')]
+    public function afficherUnProduit(int $id, ManagerRegistry $doctrine)
+    {
+        // Get the entity manager
+        $em = $doctrine->getManager();
+        // Get the repository for the "produit" entity
+        $rep = $em->getRepository(Produit::class);
+        // Search for the "produit" by id
+        $produit = $rep->find($id);
+
+        // Check if the "produit" was found
+        if (!$produit) {
+            // Optionally, handle the case where the supplier was not found (e.g., throw a 404 error)
+            throw $this->createNotFoundException('produit not found');
+        }
+
+       
+
+        // Prepare the variables for rendering
+        $vars = ['produit' => $produit,];
+
+
+
+        // Render the template with the retrieved supplier information
+        return $this->render('formulaires/unproduit_afficher.html.twig', $vars);
+    }
+
+
     ///////////////////////////////
     ///////////FORMULAIRE UPDATE Produit///////////
     ///////////////////////////////
@@ -316,7 +348,36 @@ class FormulairesController extends AbstractController
 
 
 
+    ///////////////////////////////
+    ///////////FORMULAIRE AFFICHER UNE COMMANDE///////////
+    ///////////////////////////////
 
+    #[Route('/formulaires/commande/afficher/{id}', name: 'afficheruneCommande')]
+    public function afficherUneCommande(int $id, ManagerRegistry $doctrine)
+    {
+        // Get the entity manager
+        $em = $doctrine->getManager();
+        // Get the repository for the "commande" entity
+        $rep = $em->getRepository(Commande::class);
+        // Search for the "commande" by id
+        $commande = $rep->find($id);
+
+        // Check if the "commande" was found
+        if (!$commande) {
+            // Optionally, handle the case where the supplier was not found (e.g., throw a 404 error)
+            throw $this->createNotFoundException('commande not found');
+        }
+
+       
+
+        // Prepare the variables for rendering
+        $vars = ['commande' => $commande,];
+
+
+
+        // Render the template with the retrieved supplier information
+        return $this->render('formulaires/unecommande_afficher.html.twig', $vars);
+    }
     ///////////////////////////////
     ///////////FORMULAIRE UPDATE COMMANDE///////////
     ///////////////////////////////
@@ -404,6 +465,7 @@ class FormulairesController extends AbstractController
         }
         $vars = ['formulaireDetailCommande' => $form];
         return $this->render('formulaires/detailcommande_inserer.html.twig', $vars);
+        
     }
 
 

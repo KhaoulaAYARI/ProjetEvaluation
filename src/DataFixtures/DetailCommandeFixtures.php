@@ -22,22 +22,26 @@ class DetailCommandeFixtures extends Fixture implements DependentFixtureInterfac
         $tousLesProduits=$rep->findAll();
 
         $faker=Factory::create("fr_BE");
-
-        for($i=0; $i<50; $i++){
-        $detailCommande = new DetailCommande(
+   // Pour chaque commande, créer des détails de commande
+        foreach ($toutesLesCommandes as $commande) {
+             // Assigner plusieurs produits à chaque commande
+             for ($i = 0; $i < rand(1, 5); $i++) { // Par exemple, 1 à 5 produits par commande
+                $detailCommande = new DetailCommande(
             [
                 'quantite'=>rand(5,100),
                 'prixUnitaire'=>$faker->randomFloat(2, 10, 30),
             ]
         );
-
+          // Assigner la commande courante
+          $detailCommande->setCommandesD($commande);
+    
         //fixer l'element de l'entite de coté1 "Commande":
-        $detailCommande->setCommandesD($toutesLesCommandes[rand(0, count($toutesLesCommandes)-1)]);
-        $manager->persist($detailCommande);
+        //$detailCommande->setCommandesD($toutesLesCommandes[rand(0, count($toutesLesCommandes)-1)]);
+        //$manager->persist($detailCommande);
         //fixer l'element de l'entite de coté1 "Produit":
         $detailCommande->setProduits($tousLesProduits[rand(0, count($tousLesProduits)-1)]);
         $manager->persist($detailCommande);
-        } 
+        } }
 
         $manager->flush();
     }
