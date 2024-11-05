@@ -59,8 +59,10 @@ class FormulairesController extends AbstractController
         $moyenne = $fournisseur->calculerMoyenneEvaluations();
 
         // Prepare the variables for rendering
-        $vars = ['fournisseur' => $fournisseur,
-                'moyenne' => $moyenne];
+        $vars = [
+            'fournisseur' => $fournisseur,
+            'moyenne' => $moyenne
+        ];
 
 
 
@@ -137,7 +139,6 @@ class FormulairesController extends AbstractController
             $em->flush();
             //possibilité de renvoyer vers une autre vue
             return $this->redirectToRoute('afficherTousFournisseurs');
-            
         }
 
         $vars = ['formulaireFournisseur' => $form];
@@ -201,7 +202,7 @@ class FormulairesController extends AbstractController
         $em->remove($fournisseur);
         //lancer flush
         $em->flush();
-         
+
         //redirection vers l'affichage
         return $this->redirectToRoute('afficherTousFournisseurs');
     }
@@ -238,7 +239,7 @@ class FormulairesController extends AbstractController
 
 
 
-     ///////////////////////////////
+    ///////////////////////////////
     ///////////FORMULAIRE CONSULTER UN PRODUIT ///////////
     ///////////////////////////////
     #[Route('/formulaires/produit/afficher/{id}', name: 'afficherunProduit')]
@@ -257,7 +258,7 @@ class FormulairesController extends AbstractController
             throw $this->createNotFoundException('produit not found');
         }
 
-       
+
 
         // Prepare the variables for rendering
         $vars = ['produit' => $produit,];
@@ -377,7 +378,7 @@ class FormulairesController extends AbstractController
             throw $this->createNotFoundException('commande not found');
         }
 
-       
+
 
         // Prepare the variables for rendering
         $vars = ['commande' => $commande,];
@@ -421,7 +422,6 @@ class FormulairesController extends AbstractController
             $em->flush();
             //dd($fournisseur);
             return $this->redirectToRoute('afficherToutesCommandes');
-            
         }
         $vars = ['form' => $form];
         return $this->render('formulaires/toutescommandes_update.html.twig', $vars);
@@ -476,7 +476,6 @@ class FormulairesController extends AbstractController
         }
         $vars = ['formulaireDetailCommande' => $form];
         return $this->render('formulaires/detailcommande_inserer.html.twig', $vars);
-        
     }
 
 
@@ -549,8 +548,6 @@ class FormulairesController extends AbstractController
     ///////////FORMULAIRE INSERER Evaluation///////////
     ///////////////////////////////
 
-
-
     #[Route('/formulaires/evaluation/inserer', name: 'insererEvaluation')]
     public function insererEvaluation(Request $req, ManagerRegistry $doctrine)
     {
@@ -569,6 +566,43 @@ class FormulairesController extends AbstractController
         }
         $vars = ['formulaireEvaluation' => $form];
         return $this->render('formulaires/evaluation_inserer.html.twig', $vars);
+    }
+
+    /////////////////////////////// 
+    ///////////Choisir Fournisseur et l'évaluer ///////////
+    ///////////////////////////////
+
+    #[Route('/formulaires/fournisseur/evaluer/{id}', name: 'evaluerFournisseur')]
+    public function evaluerFournisseur(Request $req, ManagerRegistry $doctrine)
+    {
+        //creer une entité vide
+        $evaluation = new Evaluation();
+
+        // obtenir le fournisseur choisi
+        $id = $req->get('id');
+        $fournisseur = $doctrine->getRepository(Fournisseur::class)->find($id);
+        // pour la nouvelle evaluation, on lui affecte le fournisseur
+        $evaluation->setEvaluationFournisseur($fournisseur);
+
+
+        //creer le form et associer l'entité au form
+        $form = $this->createForm(EvaluationType::class, $evaluation);
+
+        //gerer l'objet Request. Cet objet contiendra un GET ou un POST
+        $form->handleRequest($req);
+
+
+
+
+        //si c'est POST, on va visualiser le contenu de l'entité
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $doctrine->getManager();
+            $em->persist($evaluation);
+            $em->flush();
+            return $this->redirectToRoute('afficherToutesEvaluation');
+        }
+        $vars = ['formulaireEvaluation' => $form];
+        return $this->render('formulaires/fournisseur_evaluer.html.twig', $vars);
     }
 
 
@@ -664,11 +698,11 @@ class FormulairesController extends AbstractController
     }
 
 
-     /////////////////////////////// 
+    /////////////////////////////// 
     /////////// AFFICHER TOUS LES USERS///////////
     ///////////////////////////////
 
-    
+
 
     ///////////////////////////////
     ///////////FORMULAIRE DELETE USER///////////
@@ -729,6 +763,4 @@ class FormulairesController extends AbstractController
         $vars = ['form' => $form];
         return $this->render('formulaires/tousUsers_update.html.twig', $vars);
     }
-
-
 }

@@ -3,7 +3,7 @@
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h3>Formulaire insertion Evaluation</h3>
+<h3>Formulaire insertion Evaluation pour le Fournisseur {{ formulaireEvaluation.vars.data.evaluationFournisseur.nom }}</h3>
 {{ form_start(formulaireEvaluation, {'attr': {'id': 'insereEvaluation'}}) }}
 {{ form_row(formulaireEvaluation.note) }}
 {{ form_row(formulaireEvaluation.commentaire) }}
@@ -13,12 +13,17 @@
 {{ form_row(formulaireEvaluation.respectCriteresQualite) }}
 {{ form_row(formulaireEvaluation.respectSpecificationsProduit) }}
 {{ form_row(formulaireEvaluation.aspectGeneraleProcessusFabrication) }}
+{# {{ form_row(formulaireEvaluation._token) }} #}
+
+{# {{ form_row(formulaireEvaluation.evaluationFournisseur) }} #}
+
+
 <input type="submit" value="Inserer">
 {{ form_end(formulaireEvaluation) }}
 {% endblock %}
 
 {% block javascripts %}
-<script>
+{# <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.getElementById('insereEvaluation');
         //id attribute on the form: Setting an id (insereEvaluation) ensures that your JavaScript accurately selects the correct form.
@@ -31,5 +36,5 @@
             });
         }
     });
-</script>
+</script> #}
 {% endblock %}

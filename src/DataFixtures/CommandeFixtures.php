@@ -22,7 +22,8 @@ class CommandeFixtures extends Fixture implements DependentFixtureInterface
         for($i=0; $i<100; $i++){
         $commande = new Commande(
             [
-                'numero'=>rand(10,160),
+                'numero'=>$i + 1000,
+                
                 'dateCommande'=>$faker->dateTimeBetween('-1 year', 'now'),
                 'statutCommande'=>$faker->randomElement(['en cours', 'termine']),
             ]

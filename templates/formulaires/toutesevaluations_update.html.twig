@@ -9,6 +9,11 @@
 {{ form_row(form.commentaire) }}
 {{ form_row(form.user) }}
 {{ form_row(form.evaluationFournisseur) }}
+{# {{ form_row(form.date|date('d-m-Y')) }} #}
+{{ form_row(form.systemeManagementQualite) }}
+{{ form_row(form.respectCriteresQualite) }}
+{{ form_row(form.respectSpecificationsProduit) }}
+{{ form_row(form.aspectGeneraleProcessusFabrication) }}
 
 <input type="submit" value="Update !">
 {{ form_end(form) }}

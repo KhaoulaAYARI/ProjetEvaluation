@@ -12,8 +12,10 @@
     {{ form_row(form.roles) }}
     {{ form_row(form.email) }}
 
+    
     <input type="submit" value="Update !" class="btn btn-primary">
+    {{ form_row(form._token) }}
 
-{{ form_end(form) }}
+{{ form_end(form, { render_rest:false }) }}
 
 {% endblock %}
