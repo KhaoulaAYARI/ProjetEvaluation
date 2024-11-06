@@ -1,0 +1,100 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h4 {
+    color: #2e3c94;
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+
+    
+}
+
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+
+
+/* User list styling */
+.item-list {
+     display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    justify-content: center;
+}
+
+/* User card styling */
+.item-card {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.item-matricule {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.item-card p {
+    margin: 5px 0;
+    color: #555;
+}
+
+/* Actions button styling */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+/* Button colors */
+.btn.update {
+    background-color: #506882;;
+}
+
+.btn.update:hover {
+    background-color:#25244f;
+    color: #fff;
+}
+
+.btn.consult {
+    background-color:#506882;;
+}
+
+.btn.consult:hover {
+    background-color:#25244f;
+    color: #fff;
+}
+
+.btn.delete {
+    background-color:#506882;;
+}
+
+.btn.delete:hover {
+    background-color: #e41e1e;
+    color: #fff;
+}

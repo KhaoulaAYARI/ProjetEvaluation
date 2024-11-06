@@ -1,25 +1,31 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('liste.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h4>Toutes les evaluations</h4>
-{{ "\n"|nl2br }}
-{{ "\n"|nl2br }}
-<ul>
-{% for evaluation in toutesevaluations %}
-<li> <b>Note:</b> {{evaluation.note}} <b>User:</b> {{evaluation.user.matricule}}
-<a href="{{ path ('updateEvaluation', {id:evaluation.id}) }}">Update</a>
-<a href="{{ path ('deleteEvaluation', {id:evaluation.id}) }}">Delete</a>
-<a href="{{ path ('afficheruneevaluation', {id:evaluation.id}) }}">Consulter</a>
+<div class="container">
+<h4 class="title">Toutes les evaluations</h4>
+<div class="item-list">
+    {% for evaluation in toutesevaluations %}
+    <div class="item-card">
+        <h5 class="item-matricule"> Fournisseur:{{evaluation.evaluationFournisseur.nom}}</h5>
+        <p><strong>Note: </strong>{{evaluation.note}} <strong>User:</strong> {{evaluation.user.matricule}}</p>
+        <p><strong> Commentaire: </strong>{{evaluation.commentaire}}</p>
+        <div class="actions">
+            <a href="{{ path ('updateEvaluation', {id:evaluation.id}) }}" class="btn update">Update</a>
+            <a href="{{ path ('deleteEvaluation', {id:evaluation.id}) }}" class="btn delete">Delete</a>
+            <a href="{{ path ('afficheruneevaluation', {id:evaluation.id}) }}" class="btn consult">Consulter</a>
 
 
-{{ "\n"|nl2br }}<b>- Commentaire </b>{{evaluation.commentaire}}
-{{ "\n"|nl2br }}<b>- Fournisseur </b>{{evaluation.evaluationFournisseur.nom}}
-{{ "\n"|nl2br }}
-</li> 
- {% endfor %}
-</ul>
+     </div>
+            </div>
+    {% endfor %}
+    </div>
+</div>
+
 
 
 {% endblock %}

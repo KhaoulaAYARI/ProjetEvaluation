@@ -1,24 +1,28 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('liste.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h4>Toutes les commandes</h4>
-{{ "\n"|nl2br }}
-{{ "\n"|nl2br }}
-<ul>
+<div class="container">
+<h4 class="title">Toutes les commandes</h4>
+<div class="item-list">
+
 {% for commande in toutescommandes %}
-<li><b>Numero de commande :</b> {{commande.numero }} 
-<a href="{{ path ('afficheruneCommande', {id:commande.id}) }}">Consulter</a>
+<div class="item-card">
+    <h5 class="item-matricule"> Numero de commande  {{commande.numero }}</h5> 
+    <p><strong>Statut:</strong> {{commande.statutCommande}} </p>
+        <div class="actions">
+            <a href="{{ path ('afficheruneCommande', {id:commande.id}) }} "class="btn consult">Consulter</a>
 
-<a href="{{ path ('updateCommande', {id:commande.id}) }}">Update</a>
-<a href="{{ path ('deleteCommande', {id:commande.id}) }}">Delete</a>
-{{ "\n"|nl2br }} <b>- Statut:</b> {{commande.statutCommande}} 
+            <a href="{{ path ('updateCommande', {id:commande.id}) }} "class="btn update">Update</a>
+            <a href="{{ path ('deleteCommande', {id:commande.id}) }}" class="btn delete">Delete</a>
 
-
-
-</li>
- {% endfor %}
-</ul>
-
+            </div>
+            </div>
+    {% endfor %}
+    </div>
+</div>
 {% endblock %}

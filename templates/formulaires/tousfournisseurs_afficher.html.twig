@@ -1,23 +1,33 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello FormulairesController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('listeFournisseur.css') }}">
+{% endblock %}
+{% block title %}Liste des Fournisseurs{% endblock %}
 
 {% block body %}
-<h4>Toutes les fournisseurs</h4>
-{{ "\n"|nl2br }}
-{{ "\n"|nl2br }}
-<ul>
-{% for fournisseur in tousfournisseurs %}
-<li><B>Nom:</B> {{fournisseur.nom }}
-<a href="{{ path ('updateFournisseur', {id:fournisseur.id}) }}">Update</a>
-<a href="{{ path ('deleteFournisseur', {id:fournisseur.id}) }}">Delete</a>
-<a href="{{ path ('afficherunFournisseur', {id:fournisseur.id}) }}">Consulter</a>
-<a href="{{ path ('evaluerFournisseur', {id:fournisseur.id}) }}">Evaluer</a>
-{{ "\n"|nl2br }}<b>-Email:</b> {{fournisseur.email}} 
-{{ "\n"|nl2br }}<b>-Adresse:</b> {{fournisseur.adresse}} 
+<div class="container">
+    <h4 class="title">Liste des Fournisseurs</h4>
+    <div class="item-list">
 
-</li>
- {% endfor %}
-</ul>
-
+        {% for fournisseur in tousfournisseurs %}
+            <div class="item-row">
+                <div class="item-info">
+                    <span class="info-title">Nom:</span> {{ fournisseur.nom }}
+                </div>
+                <div class="item-info">
+                    <span class="info-title">Email:</span> {{ fournisseur.email }}
+                </div>
+                
+                <div class="actions">
+                    <a href="{{ path('updateFournisseur', {id: fournisseur.id}) }}" class="btn btn-update">Update</a>
+                    <a href="{{ path('deleteFournisseur', {id: fournisseur.id}) }}" class="btn btn-delete">Delete</a>
+                    <a href="{{ path('afficherunFournisseur', {id: fournisseur.id}) }}" class="btn btn-consult">Consulter</a>
+                    <a href="{{ path('evaluerFournisseur', {id: fournisseur.id}) }}" class="btn btn-eval">Évaluer</a>
+                </div>
+            </div>
+        {% endfor %}
+        
+    </div>
+</div>
 {% endblock %}

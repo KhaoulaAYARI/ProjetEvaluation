@@ -1,0 +1,124 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h4 {
+    color: #2e3c94;
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+
+    
+}
+
+/* Main container */
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Title styling
+.title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+} */
+
+/* List container */
+.item-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Row styling for each fournisseur */
+.item-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr auto;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.item-row:hover {
+    background-color: #a8b0b7;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for item information */
+.item-info {
+    font-size: 15px;
+    color: #555;
+    display: flex;
+    align-items: center;
+}
+
+.info-title {
+    font-weight: bold;
+    color: #333;
+    margin-right: 8px;
+}
+
+/* Actions button styling */
+.actions {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.btn {
+    padding: 6px 12px;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Button color variations */
+.btn-update {
+    background-color:#506882;
+}
+
+.btn-update:hover {
+    background-color: #25244f;
+    color: #fff;
+}
+
+.btn-delete {
+    background-color: #506882;
+}
+
+.btn-delete:hover {
+    background-color: #c0392b;
+    color: #fff;
+}
+
+.btn-consult {
+    background-color: #506882;
+}
+
+.btn-consult:hover {
+    background-color: #25244f;
+    color: #fff;}
+
+.btn-eval {
+    background-color: #506882;
+}
+
+.btn-eval:hover {
+    background-color: #4b9c49;
+    color: #fff;
+}

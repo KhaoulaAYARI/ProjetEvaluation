@@ -1,22 +1,27 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello FormulairesController!{% endblock %}
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('liste.css') }}">
+{% endblock %}
+{% block title %}Liste des Utilisateurs{% endblock %}
 
 {% block body %}
-<h4>Tous les users</h4>
-
-<ul>
-{% for user in tousUsers %}
-<li><b>Matricule : </b> {{user.matricule }}{{ "\n"|nl2br }}
-<b>Nom : </b> {{user.nom }}{{ "\n"|nl2br }}
-<b>Email : </b> {{user.email }}{{ "\n"|nl2br }}
-<a href="{{ path ('updateUser', {id:user.id}) }}">Update</a>
-<a href="">Consulter</a>
-<a href="{{ path ('deleteUser', {id:user.id}) }}">Delete</a>
-
-
-</li>
- {% endfor %}
-</ul>
-
+<div class="container">
+    <h4 class="title">Liste des Utilisateurs</h4>
+    <div class="item-list">
+        {% for user in tousUsers %}
+            <div class="item-card">
+                <h5 class="item-matricule">Matricule: {{ user.matricule }}</h5>
+                <p><strong>Nom:</strong> {{ user.nom }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <div class="actions">
+                    <a href="{{ path('updateUser', {id: user.id}) }}" class="btn update">Update</a>
+                    <a href="" class="btn consult">Consulter</a>
+                    <a href="{{ path('deleteUser', {id: user.id}) }}" class="btn delete">Delete</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
 {% endblock %}
+
