@@ -1,31 +1,36 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Register{% endblock %}
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('insertion.css') }}">
+{% endblock %}
+{% block title %}Inscription nouveau User{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <div class="formulaire-insertion">
+        <h4>Inscription nouveau User</h4>
 
-    {{ form_errors(registrationForm) }}
+        {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm, {'attr': {'id': 'inscription'}}) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.matricule) }}
-        {# {{ form_row(registrationForm.agreeTerms) }} #}
+        {{ form_start(registrationForm, {'attr': {'id': 'insertionForm'}}) }}
+            {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword, {
+                label: 'Password'
+            }) }}
+            {{ form_row(registrationForm.nom) }}
+            {{ form_row(registrationForm.matricule) }}
+            {# {{ form_row(registrationForm.agreeTerms) }} #}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <input type="submit" value="Enregistrer">
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}
 
 
 {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('inscription');
-        //id attribute on the form: Setting an id (inscription) ensures that your JavaScript accurately selects the correct form.
+        const form = document.getElementById('insertionForm');
+        //id attribute on the form: Setting an id (insertionForm) ensures that your JavaScript accurately selects the correct form.
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {

@@ -1,26 +1,31 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('insertion.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h1>Formulaire  insertion DetailCommande</h1>
+<div class="formulaire-insertion">
+    <h4>Formulaire  insertion DetailCommande</h4>
 
-{{ form_start(formulaireDetailCommande, {'attr': {'id': 'detailCommandeForm'}}) }}
-{# Add an id to your form in the Twig template to make sure you are targeting the right element. #}
-{{ form_row(formulaireDetailCommande.quantite) }}
-{{ form_row(formulaireDetailCommande.prixUnitaire) }}
-{{ form_row(formulaireDetailCommande.commandesD) }}
-{{ form_row(formulaireDetailCommande.produits) }}
+    {{ form_start(formulaireDetailCommande, {'attr': {'id': 'insertionForm'}}) }}
+    {# Add an id to your form in the Twig template to make sure you are targeting the right element. #}
+    {{ form_row(formulaireDetailCommande.quantite) }}
+    {{ form_row(formulaireDetailCommande.prixUnitaire) }}
+    {{ form_row(formulaireDetailCommande.commandesD) }}
+    {{ form_row(formulaireDetailCommande.produits) }}
 
-<input type="submit" value="Inserer">
-{{ form_end(formulaireDetailCommande) }}
+    <input type="submit" value="Inserer">
+    {{ form_end(formulaireDetailCommande) }}
+</div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('detailCommandeForm');
-        //id attribute on the form: Setting an id (detailCommandeForm) ensures that your JavaScript accurately selects the correct form.
+        const form = document.getElementById('insertionForm');
+        //id attribute on the form: Setting an id (insertionForm) ensures that your JavaScript accurately selects the correct form.
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {

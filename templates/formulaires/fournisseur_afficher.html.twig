@@ -1,27 +1,36 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('insertion.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
+ <div class="formulaire-insertion">
+    <h4>Formulaire insertion Fournisseur</h4>
 
-<h1>Formulaire insertion Fournisseur</h1>
+    {{ form_start(formulaireFournisseur, {'attr': {'id': 'insertionForm'}}) }}
+    {# Add an id to your form in the Twig template to make sure you are targeting the right element. #}
 
-{{ form_start(formulaireFournisseur, {'attr': {'id': 'insererFournisseur'}}) }}
-{# Add an id to your form in the Twig template to make sure you are targeting the right element. #}
-
-{{ form_row(formulaireFournisseur.nom) }}
-{{ form_row(formulaireFournisseur.adresse) }}
-{{ form_row(formulaireFournisseur.email) }}
-<input type="submit" value="Inserer">
-{{ form_end(formulaireFournisseur) }}
-
+    {{ form_row(formulaireFournisseur.nom) }}
+    {{ form_row(formulaireFournisseur.adresse) }}
+    {{ form_row(formulaireFournisseur.email) }}
+    {{ form_row(formulaireFournisseur.taille) }}
+    {{ form_row(formulaireFournisseur.localisationGeographique ) }}
+    {{ form_row(formulaireFournisseur.prix) }}
+    {{ form_row(formulaireFournisseur.certifications) }}
+    {{ form_row(formulaireFournisseur.technologiesUtilisees) }}
+    {{ form_row(formulaireFournisseur.modesDeLivraison) }}
+    <input type="submit" value="Inserer">
+    {{ form_end(formulaireFournisseur) }}
+ </div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('insererFournisseur');
-        //id attribute on the form: Setting an id (insererFournisseur) ensures that your JavaScript accurately selects the correct form.
+        const form = document.getElementById('insertionForm');
+        //id attribute on the form: Setting an id (insertionForm) ensures that your JavaScript accurately selects the correct form.
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {

@@ -1,15 +1,24 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('update.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h3>Formulaire update Evaluation</h3>
-{{ form_start(form, {'attr': {'id': 'updateEvaluation'}}) }}
+<div class="formulaire-update">
+<h4>Formulaire update Evaluation</h4>
+
+{{ form_start(form, {'attr': {'id': 'updateForm'}}) }}
 {{ form_row(form.note) }}
 {{ form_row(form.commentaire) }}
 {{ form_row(form.user) }}
 {{ form_row(form.evaluationFournisseur) }}
-{# {{ form_row(form.date|date('d-m-Y')) }} #}
+{{ form_row(form.date) }}
+
+{# Display the date in 'd-m-Y' format, if you want to show it separately #}
+{# {{ form.date.vars.value|date('d-m-Y') }} #}
+
 {{ form_row(form.systemeManagementQualite) }}
 {{ form_row(form.respectCriteresQualite) }}
 {{ form_row(form.respectSpecificationsProduit) }}
@@ -17,13 +26,14 @@
 
 <input type="submit" value="Update !">
 {{ form_end(form) }}
+</div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('updateEvaluation');
-        //id attribute on the form: Setting an id (updateEvaluation) ensures that your JavaScript accurately selects the correct form.
+        const form = document.getElementById('updateForm');
+        //id attribute on the form: Setting an id (updateForm) ensures that your JavaScript accurately selects the correct form.
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {

@@ -9,6 +9,8 @@ import './bootstrap.js';
 
 // app.js
 import './styles/app.css';
+console.log('Bienvenue dans votre projet Symfony avec Webpack Encore');
+//import './styles/vue1.css';
 // rajouter
 // jquery
 const $ = require ('jquery');

@@ -1,29 +1,34 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('update.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h1>Formulaire Update Fournisseur</h1>
-{{ form_start(form, {'attr': {'id': 'updateFournisseur'}}) }}
-{{ form_row(form.nom) }}
-{{ form_row(form.adresse) }}
-{{ form_row(form.email) }}
-{{ form_row(form.taille) }}
-{{ form_row(form.localisationGeographique) }}
-{{ form_row(form.prix) }}
-{{ form_row(form.certifications) }}
-{{ form_row(form.technologiesUtilisees) }}
-{{ form_row(form.modesDeLivraison) }}
+<div class="formulaire-update">
+    <h4>Formulaire Update Fournisseur</h4>
+    {{ form_start(form, {'attr': {'id': 'updateForm'}}) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.taille) }}
+    {{ form_row(form.localisationGeographique) }}
+    {{ form_row(form.prix) }}
+    {{ form_row(form.certifications) }}
+    {{ form_row(form.technologiesUtilisees) }}
+    {{ form_row(form.modesDeLivraison) }}
 
-<input type="submit" value="Update !">
-{{ form_end(form) }}
+    <input type="submit" value="Update !">
+    {{ form_end(form) }}
+</div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('updateFournisseur');
-        //id attribute on the form: Setting an id (updateFournisseur) ensures that your JavaScript accurately selects the correct form.
+        const form = document.getElementById('updateForm');
+        //id attribute on the form: Setting an id (updateForm) ensures that your JavaScript accurately selects the correct form.
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {

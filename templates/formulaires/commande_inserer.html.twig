@@ -1,24 +1,29 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('insertion.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h4>Formulaire insertion Commande</h4>
-{{ form_start(formulaireCommande, {'attr': {'id': 'insertionCommandeForm'}}) }}
-{{ form_row(formulaireCommande.numero) }}
-{{ form_row(formulaireCommande.dateCommande) }}
-{{ form_row(formulaireCommande.statutCommande) }}
-{{ form_row(formulaireCommande.commandeFournisseur) }}
+<div class="formulaire-insertion">
+        <h4>Formulaire insertion Commande</h4>
+        {{ form_start(formulaireCommande, {'attr': {'id': 'insertionForm'}}) }}
+        {{ form_row(formulaireCommande.numero) }}
+        {{ form_row(formulaireCommande.dateCommande) }}
+        {{ form_row(formulaireCommande.statutCommande) }}
+        {{ form_row(formulaireCommande.commandeFournisseur) }}
 
-<input type="submit" value="Inserer">
-{{ form_end(formulaireCommande) }}
+        <input type="submit" value="Inserer">
+        {{ form_end(formulaireCommande) }}
+</div>
 {% endblock %}
 
 {% block javascripts %}
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('insertionCommandeForm');
-        //id attribute on the form: Setting an id (insertionCommandeForm) ensures that your JavaScript accurately selects the correct form.
+        const form = document.getElementById('insertionForm');
+        //id attribute on the form: Setting an id (insertionForm) ensures that your JavaScript accurately selects the correct form.
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {

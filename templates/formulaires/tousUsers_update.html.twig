@@ -1,21 +1,25 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('update.css') }}">
+{% endblock %}
 {% block title %}Update User{% endblock %}
 
 {% block body %}
-<h4>Formulaire Update User</h4>
+<div class="formulaire-update">
+    <h4>Formulaire Update User</h4>
 
-{{ form_start(form) }}
+    {{ form_start(form, {'attr': {'id': 'updateForm'}}) }}
 
-    {{ form_row(form.matricule) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.roles) }}
-    {{ form_row(form.email) }}
+        {{ form_row(form.matricule) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.roles) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password) }}
+        
+        <input type="submit" value="Update !">
+        {{ form_row(form._token) }}
 
-    
-    <input type="submit" value="Update !" class="btn btn-primary">
-    {{ form_row(form._token) }}
-
-{{ form_end(form, { render_rest:false }) }}
-
+    {{ form_end(form, { render_rest:false }) }}
+</div>
 {% endblock %}
