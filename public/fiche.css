@@ -1,0 +1,70 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h4 {
+    color: #2e3c94;
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+
+    
+}
+
+/* Main container styling */
+.container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 20px;
+  
+    background-color: #ecedf1;
+}
+
+.item-info .sub-info {
+    font-size: 15px;
+    color: #791313;
+    padding-left: 10px;
+    text-decoration: underline;
+    
+}
+
+
+/* Product details card */
+.item-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+/* Product detail line */
+.item-info {
+    margin: 10px 0;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Highlight label */
+.item-info b {
+    color: #333;
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+/* Spacing between information lines */
+.item-info:not(:last-child) {
+    border-bottom: 1px dashed #e0e0e0;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+}
+
+/* Styling for nested details, like fournisseur name */
+.item-info .sub-info {
+    font-size: 15px;
+    color: #666;
+    padding-left: 10px;
+}
+

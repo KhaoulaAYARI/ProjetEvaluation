@@ -1,20 +1,44 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('fiche.css') }}">
+{% endblock %}
 {% block body %}
+<div class="container">
 <h4>L'evaluation choisie est :</h4>
-{{ "\n"|nl2br }}
-{{ "\n"|nl2br }}
-{{ "\n"|nl2br }} <b>note</b> {{evaluation.note}} 
-{{ "\n"|nl2br }} <b>user</b> {{evaluation.user.nom}} 
-{{ "\n"|nl2br }} <b>fournisseur</b> {{evaluation.evaluationFournisseur.nom}} 
- {{ "\n"|nl2br }} <b>commentaire</b> {{evaluation.commentaire}} 
- {{ "\n"|nl2br }} <b>date: </b> {{ evaluation.date|date('d-m-Y') }}
- {{ "\n"|nl2br }} <b>systeme Management Qualite</b> {{evaluation.systemeManagementQualite}} 
- {{ "\n"|nl2br }} <b>respect Criteres Qualite</b> {{evaluation.respectCriteresQualite}} 
- {{ "\n"|nl2br }} <b>respect Specifications Produit</b> {{evaluation.respectSpecificationsProduit}} 
- {{ "\n"|nl2br }} <b>aspect Generale Processus Fabrication</b> {{evaluation.aspectGeneraleProcessusFabrication}} 
- {{ "\n"|nl2br }}Si vous voulez avoir plus de detail, veuillez consulter le rapport d'audit!!
- 
+    <div class="item-card">
+        <div class="item-info">
+            <b>note</b> {{evaluation.note}} 
+        </div>
+        <div class="item-info">
+            <b>user</b> {{evaluation.user.nom}} 
+        </div>
+        <div class="item-info">
+             <b>fournisseur</b> {{evaluation.evaluationFournisseur.nom}} 
+        </div>
+        <div class="item-info">
+            <b>commentaire</b> {{evaluation.commentaire}} 
+        </div>
+        <div class="item-info">
+             <b>date: </b> {{ evaluation.date|date('d-m-Y') }}
+        </div>
+        <div class="item-info">
+             <b>systeme Management Qualite</b> {{evaluation.systemeManagementQualite}} 
+        </div>
+        <div class="item-info">
+            <b>respect Criteres Qualite</b> {{evaluation.respectCriteresQualite}} 
+        </div>
+        <div class="item-info">
+             <b>respect Specifications Produit</b> {{evaluation.respectSpecificationsProduit}} 
+        </div>
+        <div class="item-info">
+        <b>aspect Generale Processus Fabrication</b> {{evaluation.aspectGeneraleProcessusFabrication}} 
+        </div>
+        <div class="item-info">
+        {{ "\n"|nl2br }}Si vous voulez avoir plus de detail, veuillez consulter le rapport d'audit!!
+                 </div>
+    </div>
+</div>
 {% endblock %}

@@ -1,5 +1,8 @@
 {% extends 'base.html.twig' %}  
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('filtre.css') }}">
+{% endblock %}
 {% block title %}Hello FiltreController!{% endblock %}
 
 {% block body %}
@@ -44,10 +47,13 @@
                 console.log (arrayCommandes);    
                 arrayCommandes.forEach ( function (commandes)  {
                         // manipuler le DOM. Ex: vider un div et le remplir avec les résultats
-                        divResultats.innerHTML += "<p><b>Numero:</b> " + commandes.numero + "</p>";
+                        divResultats.innerHTML += `
+                            <div class="fournisseur-item"><p><b>Numero:</b>  ${commandes.numero}</p>
 
-                        divResultats.innerHTML +="<p><b>Date:</b> " + commandes.dateCommande + "</p>"; 
-                        divResultats.innerHTML +="<p><b>Statut:</b> " + commandes.statutCommande + "</p>" ;
+                        <p>Date: ${commandes.dateCommande} </p>
+                        <p>Statut: ${commandes.statutCommande} </p>    
+                        </div>
+                        `;
                         })
                         divResultats.innerHTML += "<hr>";
                     }

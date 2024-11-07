@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}  
 {# ok syllabus02-10-24 #}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('filtre.css') }}">
+{% endblock %}
 {% block title %}Hello FiltreController!{% endblock %}
 
 {% block body %}
@@ -45,12 +48,14 @@
                 console.log (arrayFournisseurs);    
                 arrayFournisseurs.forEach ( function (fournisseur)  {
                         // manipuler le DOM. Ex: vider un div et le remplir avec les résultats
-                        divResultats.innerHTML += "<p><b>Nom:</b> " + fournisseur.nom + "</p>";
-                      
                         
-
-                        divResultats.innerHTML +="<p><b>Email:</b> " + fournisseur.email + "</p>";
-                        divResultats.innerHTML +="<p><b>Adresse:</b> " + fournisseur.adresse + "</p>" ;
+                        divResultats.innerHTML += `
+                            <div class="fournisseur-item">
+                                <p><b>Nom:</b> ${fournisseur.nom}</p>
+                                <p>Email: ${fournisseur.email}</p>
+                                <p>Adresse: ${fournisseur.adresse}</p>
+                            </div>
+                        `;
                         ////<a href=""  un lien pour tester ensuite l'ameliorer et mettre un bouton qui va m'envoyer a la page "fiche" de fournisseur choisit"//////
                         })
                         

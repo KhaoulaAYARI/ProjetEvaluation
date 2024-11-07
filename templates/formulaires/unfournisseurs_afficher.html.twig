@@ -1,51 +1,78 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('fiche.css') }}">
+{% endblock %}
 {% block body %}
+<div class="container">
 <h4>Le fournisseur choisi est :</h4>
-{{ "\n"|nl2br }}
-
-
-
-
-
- <b>Nom:</b> {{ fournisseur.nom|default("fournisseur n'existe pas") }}
-{{ "\n"|nl2br }}
-
- <b>Moyenne des Evaluations:</b> 
- 
- {{moyenne}}
-
+  <div class="item-card">
+        <div class="item-info">
+        <b>Nom:</b> {{ fournisseur.nom|default("fournisseur n'existe pas") }}
+        </div>
+        <div class="item-info">
+        <b>Moyenne des Evaluations:</b> 
+        {{moyenne}}
+        </div>
+        <div class="item-info">
 {% if moyenne <3 %}
-   {{ "\n"|nl2br }} <b>Classe C</b>
+    <span class="sub-info"><b>"Classe C"</b></span>
 {% elseif moyenne ==3 %}
-    {{ "\n"|nl2br }} <b>Classe B</b>
+     <span class="sub-info"><b>"Classe B"</b></span>
 {% else %}
-  {{ "\n"|nl2br }} <b>Classe A</b>
+   <span class="sub-info"><b>"Classe A"</b></span>
 {% endif %}
- {{ "\n"|nl2br }} <b>Email:</b> {{fournisseur.email}} 
-{{ "\n"|nl2br }} <b>Adresse:</b> {{fournisseur.adresse}} 
- {{ "\n"|nl2br }} <b>Taille:</b> {{fournisseur.taille}} 
- {{ "\n"|nl2br }} <b>Localisation Geographique:</b> {{fournisseur.localisationGeographique}} 
-  {{ "\n"|nl2br }} <b>Prix:</b> {{fournisseur.prix}} 
- {{ "\n"|nl2br }} <b>Certifications:</b> {{fournisseur.certifications}} 
- {{ "\n"|nl2br }} <b>Technologies Utilisees:</b> {{fournisseur.technologiesUtilisees}} 
-  {{ "\n"|nl2br }} <b>Modes De Livraison:</b> {{fournisseur.modesDeLivraison}}
-{{ "\n"|nl2br }} <b>Liste de produits:</b> {{ "\n"|nl2br }}
-{% for produit in fournisseur.produitsF %}
-    {{ produit.matricule }}<br>
-{% endfor %}
- {{ "\n"|nl2br }} <b>Liste de Commandes:</b> {{ "\n"|nl2br }}
- {% for item in fournisseur.commandes %}
-    {{ item.numero }}<br>
-{% endfor %}
- {{ "\n"|nl2br }}
+        </div>
+        <div class="item-info">
+        <b>Email:</b> {{fournisseur.email}} 
+        </div>
+        <div class="item-info">
+        <b>Adresse:</b> {{fournisseur.adresse}} 
+        </div>
+        <div class="item-info">
+        <b>Taille:</b> {{fournisseur.taille}} 
+        </div>
+        <div class="item-info">
+        <b>Localisation Geographique:</b> {{fournisseur.localisationGeographique}} 
+        </div>
+        <div class="item-info">
+       <b>Prix:</b> {{fournisseur.prix}} 
+       </div>
+        <div class="item-info">
+        <b>Certifications:</b> {{fournisseur.certifications}} 
+        </div>
+        <div class="item-info">
+       <b>Technologies Utilisees:</b> {{fournisseur.technologiesUtilisees}}
+       </div>
+        <div class="item-info"> 
+       <b>Modes De Livraison:</b> {{fournisseur.modesDeLivraison}}
+       </div>
+        <div class="item-info">
+     <b>Liste de produits:</b> {{ "\n"|nl2br }}
+      {% for produit in fournisseur.produitsF %}
+      {{ produit.matricule }}<br>
+      {% endfor %}
+        </div>
+        <div class="item-info">
+         <b>Liste de Commandes:</b> {{ "\n"|nl2br }}
+        {% for item in fournisseur.commandes %}
+            {{ item.numero }}<br>
+        {% endfor %}
+        </div>
+        <div class="item-info">
+ 
  <b>Liste des Evaluations:</b> {{ "\n"|nl2br }}
  {% for item in fournisseur.evaluations %}
     <b>date:</b> {{ item.date|date('d-m-Y') }} <b>note:</b>{{ item.note }} 
     <br>
 {% endfor %}
- {{ "\n"|nl2br }}
+    </div>
+   
+</div> 
+</div>
+    
+ 
 
 {% endblock %}

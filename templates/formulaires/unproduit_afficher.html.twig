@@ -1,17 +1,32 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Détails du Produit{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('fiche.css') }}">
+{% endblock %}
 
 {% block body %}
-<h4>Le produit choisi est :</h4>
-{{ "\n"|nl2br }}
- {{ "\n"|nl2br }} <b>Matricule:</b> {{produit.matricule}}
-{{ "\n"|nl2br }}
-{{ "\n"|nl2br }} <b>- Id:</b> {{produit.id }}
-{{ "\n"|nl2br }} <b>- Prix:</b> {{produit.prix }}
-{{ "\n"|nl2br }} <b>- description:</b> {{produit.description }}
- {{ "\n"|nl2br }}<b>- Fournisseur:</b> {{produit.produitFournisseur.nom}} 
- 
+<div class="container">
+    <h4>Le produit choisi est :</h4>
 
-
+    <div class="item-card">
+        <div class="item-info">
+            <b>Matricule:</b> {{ produit.matricule }}
+        </div>
+        <div class="item-info">
+            <b>Id:</b> {{ produit.id }}
+        </div>
+        <div class="item-info">
+            <b>Prix:</b> {{ produit.prix }}
+        </div>
+        <div class="item-info">
+            <b>Description:</b> {{ produit.description }}
+        </div>
+        <div class="item-info">
+            <b>Fournisseur:</b> <span class="sub-info">{{ produit.produitFournisseur.nom }}</span>
+        </div>
+    </div>
+</div>
 {% endblock %}

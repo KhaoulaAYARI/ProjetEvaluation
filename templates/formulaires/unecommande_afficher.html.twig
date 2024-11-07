@@ -1,23 +1,34 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('fiche.css') }}">
+{% endblock %}
 {% block body %}
+<div class="container">
 <h4>La commande choisie est :</h4>
-{{ "\n"|nl2br }}
- {{ "\n"|nl2br }} <b>Numero:</b> {{commande.numero}}
-{{ "\n"|nl2br }} <b>- Id:</b> {{commande.id }}
-{{ "\n"|nl2br }}  <b>- Statut:</b> {{commande.statutCommande}} 
-{{ "\n"|nl2br }} <b>- Fournisseur:</b> {{commande.commandeFournisseur.nom }}
-{{ "\n"|nl2br }} <b>- DateCommande:</b> {{commande.dateCommande|date('Y-m-d') }}{{ "\n"|nl2br }}
-
-{% for item in commande.commandeDetailCommande %}
-   Cette commande utilise une<b> quantite: </b>egale à {{ item.quantite }} (unités) du produit ayant la <b> matricule: </b>{{ item.produits.matricule }} {{ "\n"|nl2br }}
-    <br>
-{% endfor %}
-
-
-
-
-
+<div class="item-card">
+        <div class="item-info">
+             <b>Numero:</b> {{commande.numero}}
+        </div>
+        <div class="item-info">
+             <b>- Id:</b> {{commande.id }}
+        </div>
+        <div class="item-info">
+                <b>- Statut:</b> {{commande.statutCommande}} 
+        </div>
+        <div class="item-info">
+                <b>- Fournisseur:</b> {{commande.commandeFournisseur.nom }}
+        </div>
+        <div class="item-info">
+            <b>- DateCommande:</b> {{commande.dateCommande|date('Y-m-d') }}
+        </div>
+        <div class="item-info">
+            {% for item in commande.commandeDetailCommande %}
+            Cette commande utilise une<b> quantite: </b>egale à {{ item.quantite }} (unités) du produit ayant la <b> matricule: </b>{{ item.produits.matricule }} {{ "\n"|nl2br }}    
+            {% endfor %}
+    <br></div>
+    </div>
+</div>
 {% endblock %}

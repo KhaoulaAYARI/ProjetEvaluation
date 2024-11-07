@@ -1,32 +1,37 @@
 {% extends 'base.html.twig' %}
-
+{% block stylesheets %}
+    {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
+    <link rel="stylesheet" href="{{ asset('insertion.css') }}">
+{% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
-<h3>Formulaire insertion Evaluation pour le Fournisseur {{ formulaireEvaluation.vars.data.evaluationFournisseur.nom }}</h3>
-{{ form_start(formulaireEvaluation, {'attr': {'id': 'insereEvaluation'}}) }}
-{{ form_row(formulaireEvaluation.note) }}
-{{ form_row(formulaireEvaluation.commentaire) }}
-{{ form_row(formulaireEvaluation.user) }}
-{{ form_row(formulaireEvaluation.evaluationFournisseur) }}
-{{ form_row(formulaireEvaluation.systemeManagementQualite) }}
-{{ form_row(formulaireEvaluation.respectCriteresQualite) }}
-{{ form_row(formulaireEvaluation.respectSpecificationsProduit) }}
-{{ form_row(formulaireEvaluation.aspectGeneraleProcessusFabrication) }}
-{# {{ form_row(formulaireEvaluation._token) }} #}
+<div class="formulaire-insertion">
+    <h4>Formulaire insertion Evaluation pour le Fournisseur {{ formulaireEvaluation.vars.data.evaluationFournisseur.nom }}</h4>
+    {{ form_start(formulaireEvaluation, {'attr': {'id': 'insertionForm'}}) }}
+    {{ form_row(formulaireEvaluation.note) }}
+    {{ form_row(formulaireEvaluation.commentaire) }}
+    {{ form_row(formulaireEvaluation.user) }}
+    {{ form_row(formulaireEvaluation.evaluationFournisseur) }}
+    {{ form_row(formulaireEvaluation.systemeManagementQualite) }}
+    {{ form_row(formulaireEvaluation.respectCriteresQualite) }}
+    {{ form_row(formulaireEvaluation.respectSpecificationsProduit) }}
+    {{ form_row(formulaireEvaluation.aspectGeneraleProcessusFabrication) }}
+    {# {{ form_row(formulaireEvaluation._token) }} #}
 
-{# {{ form_row(formulaireEvaluation.evaluationFournisseur) }} #}
+    {# {{ form_row(formulaireEvaluation.evaluationFournisseur) }} #}
 
 
-<input type="submit" value="Inserer">
-{{ form_end(formulaireEvaluation) }}
+    <input type="submit" value="Inserer">
+    {{ form_end(formulaireEvaluation) }}
+</div>
 {% endblock %}
 
 {% block javascripts %}
 {# <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('insereEvaluation');
-        //id attribute on the form: Setting an id (insereEvaluation) ensures that your JavaScript accurately selects the correct form.
+        const form = document.getElementById('insertionForm');
+        //id attribute on the form: Setting an id (insertionForm) ensures that your JavaScript accurately selects the correct form.
         if (form) {
 			//The if (form) line verifies that the form is in the DOM before trying to add the event listener.
             form.addEventListener('submit', function(event) {
