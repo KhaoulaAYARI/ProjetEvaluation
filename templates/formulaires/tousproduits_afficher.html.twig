@@ -7,10 +7,25 @@
 
 {% block body %}
 <div class="container">
-<h4 class="title">Tous les produits</h4>
-<div class="item-list">
+<h4 class="title">Tous les produits par fournisseur</h4>
+ {% for fournisseur, produits in produitsParFournisseur %}
+        <div class="fournisseur">
+            <h5>Fournisseur :{{ fournisseur }}</h5> <!-- Nom du fournisseur -->
 
-    {% for produit in touslesproduits %}
+            <div class="item-card">
+                {% for produit in produits %}
+                    <div class="produit-item">
+                        <p><b>Matricule du produit N°{{ loop.index }}:</b> {{ produit.matricule }}</p>
+                        <p><b>Prix:</b> {{ produit.prix }} €</p>
+                        <p><b>Description:</b> {{ produit.description }}</p>
+                        <p><b>----------------</b></p>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+{# <div class="item-list"> #}
+    {# {% for produit in touslesproduits %}
     <div class="item-card">
         <h5 class="item-matricule"> Matricule: {{produit.matricule }}</h5>
         <p><strong>Fournisseur:</strong>  {{produit.produitFournisseur.nom}} </p>
@@ -20,7 +35,7 @@
                 <a href="{{ path ('deleteProduit', {id:produit.id}) }}" class="btn delete">Delete</a>
             </div>
             </div>
-    {% endfor %}
+    {% endfor %} #}
     </div>
 </div>
 {% endblock %}

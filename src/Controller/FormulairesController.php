@@ -282,9 +282,15 @@ class FormulairesController extends AbstractController
         //obtenier tous les produits de la BD
         $em = $doctrine->getManager();
         $rep = $em->getRepository(Produit::class);
-        $touslesproduits = $rep->findAll();
+        $produits = $rep->findAll();
+         // Organiser les produits par fournisseur
+        $produitsParFournisseur = [];
+        foreach ($produits as $produit) {
+        $fournisseurNom = $produit->getProduitFournisseur()->getNom();
+        $produitsParFournisseur[$fournisseurNom][] = $produit;
+        }
 
-        $vars = ['touslesproduits' => $touslesproduits];
+        $vars = ['produitsParFournisseur' => $produitsParFournisseur];
         //Envoyer l'array de produits à la vue
         return $this->render('formulaires/tousproduits_afficher.html.twig', $vars);
     }

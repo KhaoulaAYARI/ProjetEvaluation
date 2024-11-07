@@ -11,6 +11,11 @@ h4 {
 
     
 }
+.fournisseur h5 {
+    color: #2e3c94;
+    font-size: 20px;
+    font-weight: bold;
+}
 
 /* Container styling */
 .container {
