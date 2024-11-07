@@ -1,29 +1,53 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello FormulairesController!{% endblock %}
-
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('fiche.css') }}">
+{% endblock %}
 {% block body %}
+<div class="container">
 <h4>Resultat Recherche fournisseur par nom sans ajax</h4>
 
-{{ "\n"|nl2br }}
-{{ "\n"|nl2br }}
+
 {% for item in fournisseur %}
-    <b>nom:</b> {{ item.nom }}
- {{ "\n"|nl2br }} <b>Email:</b> {{item.email}} 
-{{ "\n"|nl2br }} <b>Adresse:</b> {{item.adresse}} 
- {{ "\n"|nl2br }} <b>Taille:</b> {{item.taille}} 
- {{ "\n"|nl2br }} <b>Localisation Geographique:</b> {{item.localisationGeographique}} 
-  {{ "\n"|nl2br }}<b> Prix:</b> {{item.prix}} 
- {{ "\n"|nl2br }} <b>Certifications:</b> {{item.certifications}} 
- {{ "\n"|nl2br }} <b>Technologies Utilisees:</b> {{item.technologiesUtilisees}} 
-  {{ "\n"|nl2br }} <b>Modes De Livraison:</b> {{item.modesDeLivraison}} 
+ <div class="item-card">
+        <div class="item-info">
+            <b>nom:</b> {{ item.nom }}
+        </div>
+        <div class="item-info">
+            <b>Email:</b> {{item.email}} 
+        </div>
+        <div class="item-info">
+            <b>Adresse:</b> {{item.adresse}} 
+        </div>
+        <div class="item-info">
+            <b>Taille:</b> {{item.taille}} 
+        </div>
+        <div class="item-info">
+            <b>Localisation Geographique:</b> {{item.localisationGeographique}} 
+        </div>
+        <div class="item-info">
+            <b> Prix:</b> {{item.prix}} 
+        </div>
+        <div class="item-info">
+            <b>Certifications:</b> {{item.certifications}} 
+        </div>
+        <div class="item-info">
+            <b>Technologies Utilisees:</b> {{item.technologiesUtilisees}} 
+        </div>
+        <div class="item-info">
+            <b>Modes De Livraison:</b> {{item.modesDeLivraison}}
+        </div>
+        <div class="item-info">    
 
 {% else %}
     <p>Le fournisseur n'existe pas.</p>
 {% endfor %}
-
-
-
+        </div>
+{{ "\n"|nl2br }} 
+</div>
+</div>
  {# nom: {{ fournisseur.nom|default("fournisseur n'existe pas") }} #}
  {# {{ "\n"|nl2br }} Email: {{fournisseur.email}}  #}
 {% endblock %}
