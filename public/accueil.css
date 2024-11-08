@@ -1,0 +1,59 @@
+/* Applique un fond agréable et une police moderne à la page */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f6f8; /* Fond doux pour la page */
+    color: #333; /* Texte sombre */
+    margin: 0;
+    padding: 0;
+}
+
+/* Conteneur centré */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Section principale avec un fond clair et un espacement équilibré */
+.hero {
+    background-color: #ffffff;
+    padding: 50px;
+    text-align: center;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre subtile autour */
+    margin-top: 50px;
+}
+
+/* Titre de bienvenue avec une taille de police large et une couleur douce */
+.hero h1 {
+    font-size: 36px;
+    color: #2c3e50; /* Couleur sombre pour le titre */
+    margin-bottom: 20px;
+}
+
+/* Sous-titre et paragraphe avec une couleur plus douce */
+.hero p {
+    font-size: 18px;
+    color: #7f8c8d; /* Couleur grise pour un texte léger */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Ajouter une petite touche de couleur au lien, si nécessaire */
+a {
+    color: #3498db; /* Couleur bleue pour les liens */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline; /* Ajout d'un effet au survol */
+}
+
+/* Ajouter une petite marge au bas du contenu pour plus d'espace */
+footer {
+    margin-top: 50px;
+    text-align: center;
+    font-size: 14px;
+    color: #7f8c8d;
+}

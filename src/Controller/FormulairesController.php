@@ -408,6 +408,10 @@ class FormulairesController extends AbstractController
         $rep = $em->getRepository(Commande::class);
         $toutescommandes = $rep->findAll();
         //dd($toutescommandes);
+        // Trier les commandes par numéro
+        usort($toutescommandes, function($a, $b) {
+        return $a->getNumero() <=> $b->getNumero(); // Comparaison par numéro
+    });
         $vars = ['toutescommandes' => $toutescommandes];
         //Envoyer l'array de commandes à la vue
         return $this->render('formulaires/toutescommandes_afficher.html.twig', $vars);
@@ -485,7 +489,6 @@ class FormulairesController extends AbstractController
     }
 
 
-
     ///////////////////////////////
     ///////////FORMULAIRE UPDATE DETAILCOMMANDE///////////
     ///////////////////////////////
@@ -498,9 +501,14 @@ class FormulairesController extends AbstractController
         //obtenier tous les details commandes de la BD
         $em = $doctrine->getManager();
         $rep = $em->getRepository(DetailCommande::class);
-        $touslesdetailscommandes = $rep->findAll();
-
-        $vars = ['touslesdetailscommandes' => $touslesdetailscommandes];
+        $tousdetails = $rep->findAll();
+        // Organiser les details commandes par commande
+        $detailsParCommande = [];
+        foreach ($tousdetails as $detailcommande) {
+            $commandeNumero = $detailcommande->getCommandesD()->getNumero();
+            $detailsParCommande[$commandeNumero][] = $detailcommande;
+        }
+        $vars = ['detailsParCommande' => $detailsParCommande];
         //Envoyer l'array de lesdetailscommandes à la vue
         return $this->render('formulaires/touslesdetailscommandes_afficher.html.twig', $vars);
     }
@@ -639,6 +647,7 @@ class FormulairesController extends AbstractController
     }
 
 
+
     ///////////////////////////////
     ///////////FORMULAIRE UPDATE EVALUATION///////////
     ///////////////////////////////
@@ -651,9 +660,15 @@ class FormulairesController extends AbstractController
         //obtenier toutes les evaluations de la BD
         $em = $doctrine->getManager();
         $rep = $em->getRepository(Evaluation::class);
-        $toutesevaluations = $rep->findAll();
+        $evaluations = $rep->findAll();
         //dd($tousfournisseurs);
-        $vars = ['toutesevaluations' => $toutesevaluations];
+        // Organiser les evaluations par fournisseur
+        $evaluationsParFournisseur = [];
+        foreach ($evaluations as $evaluation) {
+            $fournisseurNom = $evaluation->getEvaluationFournisseur()->getNom();
+            $evaluationsParFournisseur[$fournisseurNom][] = $evaluation;
+        }
+        $vars = ['evaluationsParFournisseur' => $evaluationsParFournisseur];
         //Envoyer l'array des evaluations à la vue
         return $this->render('formulaires/toutesevaluations_afficher.html.twig', $vars);
     }

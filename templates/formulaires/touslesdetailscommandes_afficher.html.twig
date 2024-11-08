@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
-    <link rel="stylesheet" href="{{ asset('liste.css') }}">
+    <link rel="stylesheet" href="{{ asset('listeTableau.css') }}">
 {% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
@@ -10,7 +10,28 @@
 <h4 class="title">Tous les details commandes</h4>
 <div class="item-list">
 
-{% for detailcommande in touslesdetailscommandes %}
+{% for commande,tousdetails in detailsParCommande %}
+<div class="fournisseur">
+            <h5>commande :{{ commande }}</h5>
+            <div class="item-card">
+            {% for details in tousdetails %}
+                    <div class="item-card-produit">
+                <p>La <b>commande N°{{details.commandesD.numero}}</b> consomme une <b>quantite</b> egale a  {{details.quantite}} de produit ayant la <b>matricule </b> {{details.produits.matricule}}</p> 
+        <div class="actions">
+        <a href="{{ path ('updateDetailsCommande', {id:details.id}) }}" class="btn update">Update</a>
+
+        <a href="{{ path ('deleteDetailsCommande', {id:details.id}) }}" class="btn delete">Delete</a>
+            </div>
+            </div>
+    {% endfor %}
+    </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
+
+{# {% for detailcommande in touslesdetailscommandes %}
 <div class="item-card">
         <h5 class="item-matricule"> Id: {{detailcommande.id}} </H5>
         <p>La <b>commande N°{{detailcommande.commandesD.numero}}</b> consomme une <b>quantite</b> egale a  {{detailcommande.quantite}} de produit ayant la <b>matricule </b> {{detailcommande.produits.matricule}}</p> 
@@ -20,7 +41,4 @@
         <a href="{{ path ('deleteDetailsCommande', {id:detailcommande.id}) }}" class="btn delete">Delete</a>
             </div>
             </div>
-    {% endfor %}
-    </div>
-</div>
-{% endblock %}
+    {% endfor %} #}

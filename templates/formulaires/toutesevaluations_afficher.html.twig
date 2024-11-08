@@ -1,17 +1,43 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
-    <link rel="stylesheet" href="{{ asset('liste.css') }}">
+    <link rel="stylesheet" href="{{ asset('liste-evaluations.css') }}">
 {% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
 {% block body %}
+<h4 class="title">Toutes les évaluations par fournisseur</h4>
+
 <div class="container">
-<h4 class="title">Toutes les evaluations</h4>
-<div class="item-list">
-    {% for evaluation in toutesevaluations %}
-    <div class="item-card">
-        <h5 class="item-matricule"> Fournisseur:{{evaluation.evaluationFournisseur.nom}}</h5>
+    {% for fournisseur, evaluations in evaluationsParFournisseur %}
+        <div class="fournisseur">
+            <h5>Fournisseur : {{ fournisseur }}</h5>
+            
+            <div class="item-card">
+                {% for evaluation in evaluations %}
+                    <div class="item-card-evaluation">
+                        <p><b>Évaluation N°{{ loop.index }}:</b></p>
+                        <p><strong>Note:</strong> {{ evaluation.note }} 
+                        <strong>User:</strong> {{ evaluation.user.matricule }}</p>
+                        <p><strong>Commentaire:</strong> {{ evaluation.commentaire }}</p>
+                        
+                        <div class="actions">
+                            <a href="{{ path('updateEvaluation', {id: evaluation.id}) }}" class="btn update">Update</a>
+                            <a href="{{ path('deleteEvaluation', {id: evaluation.id}) }}" class="btn delete">Delete</a>
+                            <a href="{{ path('afficheruneevaluation', {id: evaluation.id}) }}" class="btn consult">Consulter</a>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+
+
+{# <h5 class="item-matricule"> Fournisseur:{{evaluation.evaluationFournisseur.nom}}</h5>
         <p><strong>Note: </strong>{{evaluation.note}} <strong>User:</strong> {{evaluation.user.matricule}}</p>
         <p><strong> Commentaire: </strong>{{evaluation.commentaire}}</p>
         <div class="actions">
@@ -22,10 +48,4 @@
 
      </div>
             </div>
-    {% endfor %}
-    </div>
-</div>
-
-
-
-{% endblock %}
+    {% endfor %} #}

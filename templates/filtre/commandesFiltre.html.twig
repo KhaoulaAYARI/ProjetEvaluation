@@ -6,7 +6,8 @@
 {% block title %}Hello FiltreController!{% endblock %}
 
 {% block body %}
-{{ form_start(form, {'attr':{'id':'commande-recherche-form'}}) }}
+<B>Veuillez entrez le numero de commande recherchée</B>
+{{ form_start(form, {'attr':{'id':'recherche-form'}}) }}
 {{ form_row(form.numero) }}
 {# <button type="submit" class="btn btn-outline-primary">Rechercher</button> #}
 {{ form_end(form) }}
@@ -18,7 +19,7 @@
 {# Script qui gére l'appel Axios et qui modifiera le DOM  #}
 <script>
     // on obtient le formulaire pour 
-    const form = document.getElementById('commande-recherche-form');
+    const form = document.getElementById('recherche-form');
 
     // on detectera tous les inputs du form, peu importe quel fitre on change
     form.addEventListener('input', function(event) {

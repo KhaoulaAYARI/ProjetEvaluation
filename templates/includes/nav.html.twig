@@ -1,10 +1,14 @@
 
-
+{% block stylesheets %}
+    
+    <link rel="stylesheet" href="{{ asset('filtre.css') }}">
+{% endblock %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
 
        {# option publique #}
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">🧵🪡</a>
+        <a class="navbar-brand" href="#"><b> DexOne </b> </a>
+        <a class="navbar-brand" href="#">    </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -67,23 +71,28 @@
             {# <a href="{{path('insererEvaluation')}}">Inserer Evaluation</a> #}
         
 
-        <li class="nav-item">
-       {% if app.user %}
-               
-            <a class="nav-link" href="{{ path('app_logout')}}"><h4>Logout</h4> connecté: {{app.user.email}} </a>   
-        {% else %}
-            <a class="nav-link" href="{{ path('app_login')}}"><h4>Login</h4></a>
-       {% endif %}
-        </li>
+        
         <li class="nav-item">
         <form class="d-flex" role="search">
-        <a class="btn btn-secondary" href="{{path('rechercherparnom')}}"> <h4>Rechercher fournisseur</h4> </a>
-            {# <input class="form-control me-2" type="search" placeholder="nom fournisseur" aria-label="Search"> #}
-             {# <button class="btn btn-outline-success" type="submit">Rechercher</button> #}
+        <A class="btn btn-link" href="{{path('rechercherparnom')}}"> <h4>Rechercher fournisseur</h4> </A>
         </form>
         </li>
+       {% if app.user %}
+            <li class="nav-item">
+             <a class="nav-link"> <h4>User:</h4> {{app.user.email}} </a> 
+            </li>  
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_logout')}}"><h4>Logout</h4></a>
+              </li>
+        {% else %}
+            <li class="nav-item">
+            <a class="nav-link" href="{{ path('app_login')}}"><h4>Login</h4></a>
+            </li>
+       {% endif %}
         </ul>
             
+            {# <input class="form-control me-2" type="search" placeholder="nom fournisseur" aria-label="Search"> #}
+             {# <button class="btn btn-outline-success" type="submit">Rechercher</button> #}
             
             
        

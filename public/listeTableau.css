@@ -1,0 +1,137 @@
+*{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+h4 {
+    color: #2e3c94;
+    font-size: 24px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-align: center;
+
+    
+}
+/* Container styling */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f4f7f9;
+    border-radius: 10px;
+}
+
+/* Title styling */
+.fournisseur h5 {
+    color: #2e3c94;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 25px;
+    grid-column: span 3;
+    text-transform: uppercase;
+}
+
+/* User list (grid) styling */
+.item-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+    justify-items: center;
+    align-items: start;
+    padding-top: 15px;
+}
+
+/* Card styling for each item */
+.item-card {
+    background-color: #ffffff;
+    border: 1px solid #e0e6ed;
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.item-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Matricule styling */
+.item-matricule {
+    font-size: 18px;
+    color: #2e3c94;
+    font-weight: 600;
+    margin-bottom: 12px;
+    text-align: center;
+}
+
+.item-card p {
+    margin: 10px 0;
+    color: #444;
+    line-height: 1.6;
+    font-size: 15px;
+}
+
+/* Divider line for content sections */
+.item-card p:not(:last-child) {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e0e6ed;
+}
+
+/* Actions button styling */
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+}
+
+/* Button styling */
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #fff;
+    transition: background-color 0.3s, transform 0.2s ease;
+    cursor: pointer;
+}
+
+/* Button colors */
+.btn.update {
+    background-color:  #506882;
+}
+
+.btn.update:hover {
+    background-color: #25244f;
+}
+
+.btn.consult {
+    background-color: #506882;
+}
+
+.btn.consult:hover {
+    background-color: #25244f;
+}
+
+.btn.delete {
+    background-color:  #506882;
+}
+
+.btn.delete:hover {
+    background-color: #d9534f;
+}
+
+/* Button hover effects */
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+

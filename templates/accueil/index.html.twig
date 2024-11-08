@@ -1,10 +1,26 @@
-{% extends 'base.html.twig' %}
+{# {% extends 'base.html.twig' %}
 
 {% block title %}Hello AccueilController!{% endblock %}
 
 {% block body %}
 <h1>Bienvenue au site!!</h1>
-<img src="./assets/images/img0.webp" class="img-fluid" alt="images">
 
 
+
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('accueil.css') }}">
+{% endblock %}
+{% block title %}Bienvenue sur notre application !{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="hero">
+            <h1>Bienvenue sur notre application d'évaluation des fournisseurs de matières premières !</h1>
+            <p>Cette plateforme a été conçue pour vous permettre d’évaluer efficacement la performance de vos fournisseurs.Grâce à nos outils d’analyse, vous pourrez facilement comparer les différents fournisseurs et prendre des décisions éclairées pour optimiser vos achats et garantir la qualité de vos produits..</p>
+        </div>
+    </div>
 {% endblock %}

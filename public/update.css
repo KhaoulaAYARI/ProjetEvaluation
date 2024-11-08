@@ -14,20 +14,20 @@ h4 {
 
 .formulaire-update {
   
-    padding: 20px;
-    border: 1px solid #dcd6d6;
-    border-radius: 5px;
-    background-color: #d6e1eb;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f7f9fb;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-weight: bold;
     display: flex;
-    flex-direction: column; /* Arrange les éléments en colonne */
-    gap: 15px; /* Espace entre les éléments */
-    max-width: max-content; /* Largeur maximale du formulaire */
-    margin: 0 auto; /* Centre le formulaire */
-    margin-bottom: 15px;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 600px;
+    margin: 20px auto;
+    
 }
 
 

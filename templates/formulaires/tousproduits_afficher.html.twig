@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% block stylesheets %}
     {{ parent() }} {# Si le parent contient des stylesheets, on les garde #}
-    <link rel="stylesheet" href="{{ asset('liste.css') }}">
+    <link rel="stylesheet" href="{{ asset('liste-produits.css') }}">
 {% endblock %}
 {% block title %}Hello FormulairesController!{% endblock %}
 
@@ -11,14 +11,18 @@
  {% for fournisseur, produits in produitsParFournisseur %}
         <div class="fournisseur">
             <h5>Fournisseur :{{ fournisseur }}</h5> <!-- Nom du fournisseur -->
-
             <div class="item-card">
                 {% for produit in produits %}
-                    <div class="produit-item">
+                    <div class="item-card-produit">
                         <p><b>Matricule du produit N°{{ loop.index }}:</b> {{ produit.matricule }}</p>
                         <p><b>Prix:</b> {{ produit.prix }} €</p>
                         <p><b>Description:</b> {{ produit.description }}</p>
-                        <p><b>----------------</b></p>
+                        <div class="actions">
+                            <a href="{{ path ('afficherunProduit', {id:produit.id}) }} "class="btn consult">Consulter</a>
+                            <a href="{{ path ('updateProduit', {id:produit.id}) }}"class="btn update">Update</a>
+                            <a href="{{ path ('deleteProduit', {id:produit.id}) }}" class="btn delete">Delete</a>
+                        </div>
+                       
                     </div>
                 {% endfor %}
             </div>

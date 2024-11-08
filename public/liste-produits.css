@@ -26,13 +26,22 @@ h4 {
 
 
 
-/* User list styling */
-.item-list {
-     display: flex;
-    flex-wrap: wrap; 
-    gap: 20px;
-    justify-content: center;
+
+.item-card-produit {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: left;
 }
+
+.item-card-produit:hover {
+    border: 3px solid  #506882;
+    
+} 
 
 /* User card styling */
 .item-card {
@@ -41,7 +50,7 @@ h4 {
     border-radius: 8px;
     padding: 20px;
     width: 100%;
-    max-width: 300px;
+    max-width: 700px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
 }
