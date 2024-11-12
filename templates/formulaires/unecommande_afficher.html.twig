@@ -26,7 +26,7 @@
         </div>
         <div class="item-info">
             {% for item in commande.commandeDetailCommande %}
-            Cette commande utilise une<b> quantite: </b>egale à {{ item.quantite }} (unités) du produit ayant la <b> matricule: </b>{{ item.produits.matricule }} {{ "\n"|nl2br }}    
+            Cette commande contient une<b> quantite: </b>egale à {{ item.quantite }} (unités) du produit ayant la <b> matricule: </b>{{ item.produits.matricule }} {{ "\n"|nl2br }}    
             {% endfor %}
     <br></div>
     </div>
