@@ -52,7 +52,27 @@
         <div class="item-info">
             <b>Modes De Livraison:</b> {{item.modesDeLivraison}}
         </div>
-        <div class="item-info">    
+        <div class="item-info">  
+        
+            <b>Liste de produits:</b> {{ "\n"|nl2br }}
+            {% for produit in item.produitsF %}
+            {{ produit.matricule }}<br>
+            {% endfor %}
+        </div> 
+        <div class="item-info">
+            <b>Liste de Commandes:</b> {{ "\n"|nl2br }}
+            {% for i in item.commandes %}
+                {{ i.numero }}<br>
+            {% endfor %}
+        </div>
+        <div class="item-info">
+ 
+ <b>Liste des Evaluations:</b> {{ "\n"|nl2br }}
+ {% for i in item.evaluations %}
+    <b>date:</b> {{ i.date|date('d-m-Y') }} <b>note:</b>{{ i.note }} 
+    <br>
+{% endfor %}
+    </div>  
 
 {% else %}
     <p>Le fournisseur n'existe pas.</p>
