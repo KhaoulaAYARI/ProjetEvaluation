@@ -108,9 +108,21 @@ class FormulairesController extends AbstractController
             $critere['nom'] = $filtreArray['nom'];
         }
         //dd($critere);
-        $fournisseur = $rep->findBy($critere);
+        $fournisseurs = $rep->findBy($critere);
         //dd($fournisseur);
-        $vars = ['fournisseur' => $fournisseur];
+        $moyenne = [];
+        foreach ($fournisseurs as $fournisseur) {
+            $fournisseur->moyenne = $fournisseur->calculerMoyenneEvaluations();    }
+        // Calculer la moyenne
+        // $moyenne = $fournisseur->calculerMoyenneEvaluations();
+
+        // Prepare the variables for rendering
+        $vars = [
+            'fournisseurs' => $fournisseurs,
+            
+        ];
+
+        //$vars = ['fournisseur' => $fournisseur];
         return $this->render('formulaires/resultat_recherche_sansajax.html.twig', $vars);
     }
 

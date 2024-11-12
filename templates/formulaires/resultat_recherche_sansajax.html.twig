@@ -10,10 +10,23 @@
 <h4>Resultat Recherche fournisseur par nom sans ajax</h4>
 
 
-{% for item in fournisseur %}
+{% for item in fournisseurs %}
  <div class="item-card">
         <div class="item-info">
             <b>nom:</b> {{ item.nom }}
+        </div>
+        <div class="item-info">     
+            <b>Moyenne des Evaluations:</b> 
+                {{item.moyenne}}
+        </div>
+        <div class="item-info">
+            {% if item.moyenne <3 %}
+                <span class="sub-info"><b>"Classe C"</b></span>
+            {% elseif item.moyenne ==3 %}
+                <span class="sub-info"><b>"Classe B"</b></span>
+            {% else %}
+            <span class="sub-info"><b>"Classe A"</b></span>
+            {% endif %}
         </div>
         <div class="item-info">
             <b>Email:</b> {{item.email}} 
